@@ -17,6 +17,7 @@ import SetReminder from "./pages/SetReminder";
 import ViewReminder from "./pages/ViewReminder";
 import ForgotPassword from "./pages/ForgotPassword";
 import ResetPassword from "./pages/ResetPassword";
+import Welcome from "./pages/Welcome";
 
 function App() {
   return (
@@ -36,6 +37,7 @@ function App() {
             <Route path="/profile" element={<Profile />} />
             <Route path="/forgot-password" element={<ForgotPassword />} />
             <Route path="/reset-password" element={<ResetPassword />} />
+            <Route path="/welcome" element={<Welcome />} />
           </Routes>
         </BrowserRouter>
     </AuthState>
