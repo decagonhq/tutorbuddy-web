@@ -15,6 +15,7 @@ import Reminder from "./pages/Reminder";
 import Profile from "./pages/Profile";
 import SetReminder from "./pages/SetReminder";
 import ViewReminder from "./pages/ViewReminder";
+import ForgotPassword from "./pages/ForgotPassword";
 import ResetPassword from "./pages/ResetPassword";
 
 function App() {
@@ -33,6 +34,7 @@ function App() {
             <Route path="/viewreminder" element={<ViewReminder />} />
             <Route path="/rate/:id" element={<Rate />} />
             <Route path="/profile" element={<Profile />} />
+            <Route path="/forgot-password" element={<ForgotPassword />} />
             <Route path="/reset-password" element={<ResetPassword />} />
           </Routes>
         </BrowserRouter>
