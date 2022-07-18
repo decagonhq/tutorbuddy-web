@@ -7,9 +7,14 @@ module.exports = {
         inter: ["Inter", "sans-serif"],
       },
       colors: {
-        "pry": "#FD2959",
+        pry: "#FD2959",
+        pry2: "#FFF",
+        opac: "#00000099",
       },
+      backgroundImage: (theme) => ({
+        landing: "url('/public/images/landing-img.png')",
+      }),
     },
   },
   plugins: [],
-}
+};
