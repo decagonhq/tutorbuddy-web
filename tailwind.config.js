@@ -7,9 +7,12 @@ module.exports = {
         inter: ["Inter", "sans-serif"],
       },
       colors: {
-        "pry": "#FD2959",
+        pry: "#FD2959",
       },
+      backgroundImage: (theme) => ({
+        "welcome": "url('/public/images/welcome.png')",
+      }),
     },
   },
   plugins: [],
-}
+};
