@@ -1,8 +1,5 @@
-import {
-  BrowserRouter,
-  Routes,
-  Route,
-} from "react-router-dom";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import HomePage from "./pages/HomePage";
 import Dashboard from "./pages/Dashboard";
 import Login from "./pages/Login";
 import Rate from "./pages/Rate";
@@ -24,6 +21,7 @@ function App() {
     <AuthState>
         <BrowserRouter>
           <Routes>
+            <Route path="/" element={<HomePage />} />
             <Route path="/login" element={<Login />} />
             <Route path="/tutor/signup" element={<TutorSignup />} />
             <Route path="/student/signup" element={<StudentSignup />} />
