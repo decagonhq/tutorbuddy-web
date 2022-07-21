@@ -1,8 +1,5 @@
-import {
-  BrowserRouter,
-  Routes,
-  Route,
-} from "react-router-dom";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import HomePage from "./pages/HomePage";
 import Dashboard from "./pages/Dashboard";
 import Login from "./pages/Login";
 import Rate from "./pages/Rate";
@@ -17,12 +14,14 @@ import SetReminder from "./pages/SetReminder";
 import ViewReminder from "./pages/ViewReminder";
 import ForgotPassword from "./pages/ForgotPassword";
 import ResetPassword from "./pages/ResetPassword";
+import Welcome from "./pages/Welcome";
 
 function App() {
   return (
     <AuthState>
         <BrowserRouter>
           <Routes>
+            <Route path="/" element={<HomePage />} />
             <Route path="/login" element={<Login />} />
             <Route path="/tutor/signup" element={<TutorSignup />} />
             <Route path="/student/signup" element={<StudentSignup />} />
@@ -36,6 +35,7 @@ function App() {
             <Route path="/profile" element={<Profile />} />
             <Route path="/forgot-password" element={<ForgotPassword />} />
             <Route path="/reset-password" element={<ResetPassword />} />
+            <Route path="/welcome" element={<Welcome />} />
           </Routes>
         </BrowserRouter>
     </AuthState>

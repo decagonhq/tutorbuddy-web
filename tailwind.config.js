@@ -8,9 +8,11 @@ module.exports = {
       },
       colors: {
         pry: "#FD2959",
+        pry2: "#FFF",
+        opac: "#00000099",
       },
       backgroundImage: (theme) => ({
-        "welcome": "url('/public/images/welcome.png')",
+        landing: "url('/public/images/landing-img.png')",
       }),
     },
   },
