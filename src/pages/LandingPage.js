@@ -3,7 +3,7 @@ import { useAuth } from "../context/auth/AuthState";
 import LandingHeader from "../components/global/LandingHeader";
 import Footer from "../components/global/Footer";
 
-const HomePage = () => {
+const LandingPage = () => {
   const {
     state: { userType },
   } = useAuth();
@@ -42,4 +42,4 @@ const HomePage = () => {
   );
 };
 
-export default HomePage;
+export default LandingPage;

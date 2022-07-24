@@ -1,5 +1,5 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import HomePage from "./pages/HomePage";
+import LandingPage from "./pages/HomePage";
 import Dashboard from "./pages/Dashboard";
 import Login from "./pages/Login";
 import Rate from "./pages/Rate";
@@ -19,25 +19,22 @@ import Welcome from "./pages/Welcome";
 function App() {
   return (
     <AuthState>
-        <BrowserRouter>
-          <Routes>
-            <Route path="/" element={<HomePage />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/tutor/signup" element={<TutorSignup />} />
-            <Route path="/student/signup" element={<StudentSignup />} />
-            <Route path="/dashboard" element={<Dashboard />} />
-            <Route path="/learn" element={<Learn />} />
-            <Route path="/requests" element={<Requests />} />
-            <Route path="/reminder" element={<Reminder />} />
-            <Route path="/setreminder" element={<SetReminder />} />
-            <Route path="/viewreminder" element={<ViewReminder />} />
-            <Route path="/rate/:id" element={<Rate />} />
-            <Route path="/profile" element={<Profile />} />
-            <Route path="/forgot-password" element={<ForgotPassword />} />
-            <Route path="/reset-password" element={<ResetPassword />} />
-            <Route path="/welcome" element={<Welcome />} />
-          </Routes>
-        </BrowserRouter>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<LandingPage />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/tutor/signup" element={<TutorSignup />} />
+          <Route path="/student/signup" element={<StudentSignup />} />
+          <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/learn" element={<Learn />} />
+          <Route path="/requests" element={<Requests />} />
+          <Route path="/reminder" element={<Reminder />} />
+          <Route path="/setreminder" element={<SetReminder />} />
+          <Route path="/viewreminder" element={<ViewReminder />} />
+          <Route path="/rate/:id" element={<Rate />} />
+          <Route path="/profile" element={<Profile />} />
+        </Routes>
+      </BrowserRouter>
     </AuthState>
   );
 }
