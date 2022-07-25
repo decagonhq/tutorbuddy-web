@@ -3,7 +3,7 @@ import { useAuth } from "../context/auth/AuthState";
 import LandingHeader from "../components/global/LandingHeader";
 import Footer from "../components/global/Footer";
 
-const HomePage = () => {
+const LandingPage = () => {
   const {
     state: { userType },
   } = useAuth();
@@ -30,7 +30,7 @@ const HomePage = () => {
           </p>
           <Link to={userType === "tutor" ? "/tutor/signup" : "/student/signup"}>
             <input
-              className="text-pry2 bg-[#FD2959] w-[233px] h-[48px] rounded"
+              className="text-pry2 bg-[#FD2959] w-[233px] h-[48px] rounded cursor-pointer"
               value="Get Started"
               type="button"
             />
@@ -42,4 +42,4 @@ const HomePage = () => {
   );
 };
 
-export default HomePage;
+export default LandingPage;
