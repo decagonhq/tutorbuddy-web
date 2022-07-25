@@ -10,6 +10,8 @@ module.exports = {
         pry: "#FD2959",
         pry2: "#FFF",
         opac: "#00000099",
+        bgGreen: "rgba(20, 168, 0, 0.05)",
+        grey: "rgba(33, 51, 79, 0.5)"
       },
       backgroundImage: (theme) => ({
         landing: "url('/public/images/landing-img.png')",
