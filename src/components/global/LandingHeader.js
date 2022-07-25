@@ -32,7 +32,7 @@ const LandingHeader = () => {
             className="mr-[39px] text-pry2 hidden md:block"
           >
             <input
-              className="text-pry2 bg-[#FD2959] w-[125px] h-[48px] rounded"
+              className="text-pry2 bg-[#FD2959] w-[125px] h-[48px] rounded cursor-pointer"
               value="Get Started"
               type="button"
             />

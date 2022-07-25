@@ -11,7 +11,7 @@ const Footer = () => {
         />
         <p>TutorBuddy</p>
       </div>
-      <div className="border-t flex py-4 justify-between items-center">
+      <div className="border-t bg-[#4b5b71]-800 flex py-4 justify-between items-center">
         <p>&copy; 2022 TutorBuddy. All rights reserved</p>
         <div className="flex w-[8%] justify-between">
           <div className="bg-[#374661] w-6 h-6 flex justify-center items-center rounded-full">
