@@ -30,7 +30,7 @@ const LandingPage = () => {
           </p>
           <Link to={userType === "tutor" ? "/tutor/signup" : "/student/signup"}>
             <input
-              className="text-pry2 bg-[#FD2959] w-[233px] h-[48px] rounded"
+              className="text-pry2 bg-[#FD2959] w-[233px] h-[48px] rounded cursor-pointer"
               value="Get Started"
               type="button"
             />
