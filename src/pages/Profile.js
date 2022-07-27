@@ -31,35 +31,35 @@ const Profile = () => {
 
               <span className="ml-2">Kelechi Okoli</span>
             </div>
-            <ul>
-              <li>
-                <Link to="/#" className="flex items-start mt-10 cursor-pointer">
-                  <AiOutlineUser size="22px" className="mr-2" />
-                  Edit Profile
-                </Link>
-              </li>
-              <li>
-                <Link to="/#" className="flex items-start my-4 cursor-pointer">
-                  <IoNotificationsOutline size="22px" className="mr-2" />
-                  Notification
-                </Link>
-              </li>
-              <li>
-                <Link
-                  to="/reset-password"
-                  className="flex items-start my-4 cursor-pointer"
-                >
-                  <AiOutlineLock size="22px" className="mr-2" />
-                  Change Password
-                </Link>
-              </li>
-              <li>
-                <Link to="/" className="flex items-start my-4 cursor-pointer">
-                  <AiOutlineLogout size="22px" className="mr-2" />
-                  Logout
-                </Link>
-              </li>
-            </ul>
+             <ul>
+          <li>
+            <Link to="/#" className="flex items-start mt-10 cursor-pointer">
+              <AiOutlineUser size="22px" className="mr-2" />
+              Edit Profile
+            </Link>
+          </li>
+          <li className="flex flex-row mr-[39px] my-4 cursor-pointer">
+            <IoNotificationsOutline size="22px" className="mr-2" />
+            <TopModal modalButton="Notification">
+              <NotificationContent />
+            </TopModal>
+          </li>
+          <li>
+            <Link
+              to="/reset-password"
+              className="flex items-start my-4 cursor-pointer"
+            >
+              <AiOutlineLock size="22px" className="mr-2" />
+              Change Password
+            </Link>
+          </li>
+          <li>
+            <Link to="/" className="flex items-start my-4 cursor-pointer">
+              <AiOutlineLogout size="22px" className="mr-2" />
+              Logout
+            </Link>
+          </li>
+        </ul>
           </div>
         </div>
       </div>
