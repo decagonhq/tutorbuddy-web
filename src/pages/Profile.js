@@ -3,6 +3,8 @@ import DashboardLayout from "../layout/DashboardLayout";
 import { AiOutlineUser, AiOutlineLock, AiOutlineLogout } from "react-icons/ai";
 import { IoNotificationsOutline } from "react-icons/io5";
 import { BsCamera } from "react-icons/bs";
+import TopModal from "../layout/TopModal";
+import NotificationContent from "../components/NotificationContent";
 
 const Profile = () => {
   return (
@@ -34,11 +36,11 @@ const Profile = () => {
               Edit Profile
             </Link>
           </li>
-          <li>
-            <Link to="/#" className="flex items-start my-4 cursor-pointer">
-              <IoNotificationsOutline size="22px" className="mr-2" />
-              Notification
-            </Link>
+          <li className="flex flex-row mr-[39px] my-4 cursor-pointer">
+            <IoNotificationsOutline size="22px" className="mr-2" />
+            <TopModal modalButton="Notification">
+              <NotificationContent />
+            </TopModal>
           </li>
           <li>
             <Link

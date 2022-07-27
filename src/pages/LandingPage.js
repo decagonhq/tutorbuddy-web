@@ -28,7 +28,7 @@ const LandingPage = () => {
             <br />
             Ulterior ipsum dolor sit amet, consectetur adip sed
           </p>
-          <Link to={userType === "tutor" ? "/tutor/signup" : "/student/signup"}>
+          <Link to="/dashboard">
             <input
               className="text-pry2 bg-[#FD2959] w-[233px] h-[48px] rounded cursor-pointer"
               value="Get Started"
