@@ -3,6 +3,8 @@ import DashboardLayout from "../layout/DashboardLayout";
 import { AiOutlineUser, AiOutlineLock, AiOutlineLogout } from "react-icons/ai";
 import { IoNotificationsOutline } from "react-icons/io5";
 import { BsCamera } from "react-icons/bs";
+import TopModal from "../layout/TopModal";
+import NotificationContent from "../components/NotificationContent";
 
 const Profile = () => {
   return (
