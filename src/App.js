@@ -15,6 +15,7 @@ import ViewReminder from "./pages/ViewReminder";
 import ForgotPassword from "./pages/ForgotPassword";
 import ResetPassword from "./pages/ResetPassword";
 import Welcome from "./pages/Welcome";
+import TutorDashboard from "./pages/TutorDashboard";
 
 function App() {
   return (
@@ -28,6 +29,7 @@ function App() {
           <Route path="/tutor/signup" element={<TutorSignup />} />
           <Route path="/student/signup" element={<StudentSignup />} />
           <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/tutor_dashboard" element={<TutorDashboard />} />
           <Route path="/learn" element={<Learn />} />
           <Route path="/requests" element={<Requests />} />
           <Route path="/reminder" element={<Reminder />} />
