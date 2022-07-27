@@ -1,7 +1,5 @@
 import { Link } from "react-router-dom";
 import DashboardLayout from "../layout/DashboardLayout";
-import { AiOutlineUser, AiOutlineLock, AiOutlineLogout } from "react-icons/ai";
-import { IoNotificationsOutline } from "react-icons/io5";
 import { BsCamera, BsArrowLeft } from "react-icons/bs";
 
 const StudentProfileEdit = () => {

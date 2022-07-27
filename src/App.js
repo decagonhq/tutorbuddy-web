@@ -18,6 +18,7 @@ import Welcome from "./pages/Welcome";
 import TutorProfileEdit from "./pages/TutorProfileEdit";
 import StudentProfileEdit from "./pages/StudentProfileEdit";
 import TutorDashboard from "./pages/TutorDashboard";
+import ReminderHistory from "./pages/ReminderHistory";
 
 function App() {
   return (
@@ -36,6 +37,7 @@ function App() {
           <Route path="/requests" element={<Requests />} />
           <Route path="/reminder" element={<Reminder />} />
           <Route path="/setreminder" element={<SetReminder />} />
+          <Route path="/reminder_history" element={<ReminderHistory />} />
           <Route path="/viewreminder" element={<ViewReminder />} />
           <Route path="/rate/:id" element={<Rate />} />
           <Route path="/profile" element={<Profile />} />
