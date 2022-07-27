@@ -36,6 +36,7 @@ const Profile = () => {
               Edit Profile
             </Link>
           </li>
+          {/* I Added this */}
           <li className="flex flex-row mr-[39px] my-4 cursor-pointer">
             <IoNotificationsOutline size="22px" className="mr-2" />
             <TopModal modalButton="Notification">
