@@ -15,6 +15,8 @@ import ViewReminder from "./pages/ViewReminder";
 import ForgotPassword from "./pages/ForgotPassword";
 import ResetPassword from "./pages/ResetPassword";
 import Welcome from "./pages/Welcome";
+import TutorProfileEdit from "./pages/TutorProfileEdit";
+import StudentProfileEdit from "./pages/StudentProfileEdit";
 
 function App() {
   return (
@@ -35,6 +37,8 @@ function App() {
           <Route path="/viewreminder" element={<ViewReminder />} />
           <Route path="/rate/:id" element={<Rate />} />
           <Route path="/profile" element={<Profile />} />
+          <Route path="/tutor/profile-edit" element={<TutorProfileEdit />} />
+          <Route path="/student/profile-edit" element={<StudentProfileEdit />} />
         </Routes>
       </BrowserRouter>
     </AuthState>
