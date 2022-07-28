@@ -1,6 +1,7 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import LandingPage from "./pages/LandingPage";
 import Dashboard from "./pages/Dashboard";
+import StudentDashboard from "./pages/StudentDashboard";
 import Login from "./pages/Login";
 import Rate from "./pages/Rate";
 import Requests from "./pages/Requests";
@@ -32,6 +33,7 @@ function App() {
           <Route path="/tutor/signup" element={<TutorSignup />} />
           <Route path="/student/signup" element={<StudentSignup />} />
           <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/student-dashboard" element={<StudentDashboard />} />
           <Route path="/tutor_dashboard" element={<TutorDashboard />} />
           <Route path="/learn" element={<Learn />} />
           <Route path="/requests" element={<Requests />} />
