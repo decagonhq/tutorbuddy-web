@@ -5,8 +5,12 @@ import DashboardLayout from "../layout/DashboardLayout";
 const Dashboard = () => {
   const {
     state: { userType },
+    dispatch,
   } = useAuth();
 
+  const handleUser = (userType) => {
+    dispatch({ type: "UPDATE", userType });
+  };
   return (
     <DashboardLayout>
       <div className="sm:px-4 lg:px-[100px]">
@@ -17,43 +21,42 @@ const Dashboard = () => {
         <div className="md:p-[60px] mt-4 md:mt-[70px] md:border">
           <div className="">
             <div className="flex flex-col md:flex-row justify-between">
-              <Link
+              <div
                 className="relative md:w-[48%] mb-4 md:mb-0"
-                to="/student/signup"
+                onClick={() => handleUser("student")}
               >
-                <div>
-                  <img
-                    src="./images/student.png"
-                    className="w-full rounded-lg"
-                    alt="student"
-                  />
-                  <div
-                    className={`bg-black/[0.6] w-full h-full absolute top-0 left-0 rounded-lg ${
-                      userType === "student" ? "border-2 border-pry" : ""
-                    }`}
-                  ></div>
-                  <p className="absolute left-2/4 bottom-2/4 transform -translate-x-2/4 -trasnlate-y-2/4 text-white text-2xl font-bold">
-                    Student
-                  </p>
-                </div>
-              </Link>
-              <Link className="relative md:w-[48%]" to="/tutor/signup">
-                <div>
-                  <img
-                    src="./images/tutor.png"
-                    className="w-full rounded-lg"
-                    alt="student"
-                  />
-                  <div
-                    className={`bg-black/[0.6] w-full h-full absolute top-0 left-0 rounded-lg ${
-                      userType === "tutor" ? "border-2 border-pry" : ""
-                    }`}
-                  ></div>
-                  <p className="absolute left-2/4 bottom-2/4 transform -translate-x-2/4 -trasnlate-y-2/4 text-white text-2xl font-bold">
-                    Tutor
-                  </p>
-                </div>
-              </Link>
+                <img
+                  src="./images/student.png"
+                  className="w-full rounded-lg"
+                  alt="student"
+                />
+                <div
+                  className={`bg-black/[0.6] w-full h-full absolute top-0 left-0 rounded-lg ${
+                    userType === "student" ? "border-2 border-pry" : ""
+                  }`}
+                ></div>
+                <p className="absolute left-2/4 bottom-2/4 transform -translate-x-2/4 -trasnlate-y-2/4 text-white text-2xl font-bold">
+                  Student
+                </p>
+              </div>
+              <div
+                className="relative md:w-[48%]"
+                onClick={() => handleUser("tutor")}
+              >
+                <img
+                  src="./images/tutor.png"
+                  className="w-full rounded-lg"
+                  alt="tutor"
+                />
+                <div
+                  className={`bg-black/[0.6] w-full h-full absolute top-0 left-0 rounded-lg ${
+                    userType === "tutor" ? "border-2 border-pry" : ""
+                  }`}
+                ></div>
+                <p className="absolute left-2/4 bottom-2/4 transform -translate-x-2/4 -trasnlate-y-2/4 text-white text-2xl font-bold">
+                  Tutor
+                </p>
+              </div>
             </div>
             <div className="text-center mt-[60px]">
               <Link
