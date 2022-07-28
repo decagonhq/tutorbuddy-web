@@ -1,17 +1,15 @@
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { useAuth } from "../../context/auth/AuthState";
 import TopModal from "../../layout/TopModal";
 import NotificationContent from "../NotificationContent";
 
 const Header = () => {
-  const {
-    state: { userType },
-  } = useAuth();
+  const location = useLocation();
 
   return (
     <nav className="shadow-md py-6 px-4">
       <div className="flex justify-between items-center container mx-auto">
-        <Link to="/">
+        <Link to="/" >
           <img
             src="/images/logo.svg"
             className="w-[160px] md:w-[205px]"
@@ -19,25 +17,25 @@ const Header = () => {
           />
         </Link>
         <div className="flex items-center">
-          <Link to="/dashboard" className="mr-[39px] text-pry hidden md:block">
+          <Link to="/dashboard" className={`mr-[39px] ${location.pathname === "/dashboard" ? "text-pry font-bold" : "text-black"} hidden md:block`}>
             Dashboard
           </Link>
-          <Link to="/reminder_board" className="mr-[39px] hidden md:block">
+          <Link to="/reminder_board" className={`mr-[39px] ${location.pathname === "/reminder_board" ? "text-pry font-bold" : "text-black"} hidden md:block`}>
             Reminder
           </Link>
-          <div className="mr-[39px] hidden md:block cursor-pointer">
+          <div className="mr-[39px] cursor-pointer">
             <TopModal modalButton="Notification">
               <NotificationContent />
             </TopModal>
           </div>
-          {userType === "student" && (
+          {/* {userType === "student" && (
             <Link to="/reminder" className="mr-[39px] hidden md:block">
               Reminder
             </Link>
-          )}
+          )} */}
           <Link to="/profile" className="flex items-center">
             <img src="/images/avatar.png" alt="avatar" />
-            <span className="ml-2">John Doe</span>
+            <span className={`${location.pathname === "/profile" ? "text-pry font-bold" : "text-black"} ml-2`}>John Doe</span>
           </Link>
         </div>
       </div>

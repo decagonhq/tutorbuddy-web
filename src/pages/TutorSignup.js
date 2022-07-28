@@ -17,7 +17,7 @@ const Signup = () => {
               <div>
                 <label>Name</label>
                 <input
-                  className="block border w-full mt-2 py-3 px-2"
+                  className="block border w-full mt-2 py-3 px-2 focus:outline-none"
                   type="text"
                   placeholder="Enter your full name"
                 />
@@ -33,7 +33,7 @@ const Signup = () => {
               <div className="mt-4">
                 <label>Upload Profile Picture</label>
                 <input
-                  className="block border w-full mt-2 py-2.5 px-2"
+                  className="block border w-full mt-2 py-2.5 px-2 focus:outline-none"
                   type="file"
                   placeholder="Enter your email"
                 />
@@ -41,7 +41,7 @@ const Signup = () => {
               <div className="mt-4">
                 <label>Subjects</label>
                 <select
-                  className="block border w-full mt-2 py-3 px-2"
+                  className="block border w-full mt-2 py-3 px-2 focus:outline-none"
                   placeholder="Select"
                 >
                   <option>Select</option>
@@ -57,7 +57,7 @@ const Signup = () => {
               <div className="mt-4">
                 <label>Availability</label>
                 <select
-                  className="block border w-full mt-2 py-3 px-2"
+                  className="block border w-full mt-2 py-3 px-2 focus:outline-none"
                   placeholder="Select"
                 >
                   <option>Choose</option>
@@ -71,7 +71,7 @@ const Signup = () => {
               <div className="mt-4">
                 <label>Password</label>
                 <input
-                  className="block border w-full mt-2 py-3 px-2"
+                  className="block border w-full mt-2 py-3 px-2 focus:outline-none"
                   type="password"
                   placeholder="Enter your password"
                 />

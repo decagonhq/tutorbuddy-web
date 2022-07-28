@@ -14,7 +14,7 @@ const Login = () => {
               <div>
                 <label>Email</label>
                 <input
-                  className="block border w-full mt-2 py-3 px-2"
+                  className="block border w-full mt-2 py-3 px-2 focus:outline-none"
                   type="email"
                   placeholder="Enter your email"
                 />
@@ -22,9 +22,9 @@ const Login = () => {
               <div className="mt-4 mb-2">
                 <label>Password</label>
                 <input
-                  className="block border w-full mt-2 py-3 px-2"
+                  className="block border w-full mt-2 py-3 px-2 focus:outline-none"
                   type="password"
-                  placeholder="Enter your email"
+                  placeholder="Enter your Password"
                 />
               </div>
               <Link className="text-[#17A1FA]" to="/forgot-password">

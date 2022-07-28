@@ -56,13 +56,13 @@ const StudentProfileEdit = () => {
               </div>
               <div className="mt-4 mb-2">
                 <label>Area of Interests</label>
-                <div className="mt-2 border border-[#BCCACE]-600 h-10 w-full">
-                  
-                </div>
+                <div className="mt-2 border border-[#BCCACE]-600 h-10 w-full"></div>
               </div>
-              <button className="text-sm block rounded bg-pry w-full py-3 text-white mt-6">
-                Save
-              </button>
+              <Link to="/profile">
+                <button className="text-sm block rounded bg-pry w-full py-3 text-white mt-6">
+                  Save
+                </button>
+              </Link>
             </form>
           </div>
         </div>

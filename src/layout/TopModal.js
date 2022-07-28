@@ -22,7 +22,7 @@ const TopModal = ({ modalButton, children }) => {
 
 const ModalStyle = {
     overlay: {
-      backgroundColor: "rgba(0, 0, 0, 0.4)",
+      backgroundColor: "rgba(0, 0, 0, 0)",
     },
     content: {
       top: "10%",

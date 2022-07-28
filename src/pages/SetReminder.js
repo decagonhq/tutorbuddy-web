@@ -113,9 +113,11 @@ const SetReminder = () => {
                 />
               </div>
 
-              <button className="text-sm block rounded bg-pry w-full py-3 text-white mt-6">
-                Save
-              </button>
+              <Link to="/reminder_history">
+                <button className="text-sm block rounded bg-pry w-full py-3 text-white mt-6">
+                  Save
+                </button>
+              </Link>
             </div>
           </div>
         </div>
