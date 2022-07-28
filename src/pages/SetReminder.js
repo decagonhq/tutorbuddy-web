@@ -69,7 +69,7 @@ const SetReminder = () => {
           <div className="bg-white mt-5 mb-5 md:mb-1 md:mt-1 py-6 md:py-8 border-2 border-[#BCCACE]-600">
             <div className="md:w-4/8 px-6 md:px-8 mx-auto text-sm">
               <Link
-                to="/profile"
+                to="/reminder_board"
                 className="items-startcursor-pointer bg-[#f7f7f7] w-auto inline-block py-2 px-4 rounded-full"
               >
                 <div className="flex">
@@ -90,11 +90,11 @@ const SetReminder = () => {
               <div className="mt-8">
                 <div>Date and Time</div>
                 <div className="flex justify-evenly align-center w-full mt-2 py-3 text-red-500 font-bold">
-                    <div>Day</div>
-                    <div>Month</div>
-                    <div>Hour</div>
-                    <div>Minute</div>
-                    <div></div>
+                  <div>Day</div>
+                  <div>Month</div>
+                  <div>Hour</div>
+                  <div>Minute</div>
+                  <div></div>
                 </div>
                 <Picker
                   optionGroups={optionGroups}
