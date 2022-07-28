@@ -22,7 +22,7 @@ const Header = () => {
           <Link to="/dashboard" className="mr-[39px] text-pry hidden md:block">
             Dashboard
           </Link>
-          <Link to="/setreminder" className="mr-[39px] hidden md:block">
+          <Link to="/reminder_board" className="mr-[39px] hidden md:block">
             Reminder
           </Link>
           <div className="mr-[39px] hidden md:block cursor-pointer">

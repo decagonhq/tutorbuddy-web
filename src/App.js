@@ -19,6 +19,7 @@ import TutorProfileEdit from "./pages/TutorProfileEdit";
 import StudentProfileEdit from "./pages/StudentProfileEdit";
 import TutorDashboard from "./pages/TutorDashboard";
 import ReminderHistory from "./pages/ReminderHistory";
+import ReminderBoard from "./pages/ReminderBoard";
 
 function App() {
   return (
@@ -35,6 +36,7 @@ function App() {
           <Route path="/tutor_dashboard" element={<TutorDashboard />} />
           <Route path="/learn" element={<Learn />} />
           <Route path="/requests" element={<Requests />} />
+          <Route path="/reminder_board" element={<ReminderBoard />} />
           <Route path="/reminder" element={<Reminder />} />
           <Route path="/setreminder" element={<SetReminder />} />
           <Route path="/reminder_history" element={<ReminderHistory />} />
@@ -42,7 +44,10 @@ function App() {
           <Route path="/rate/:id" element={<Rate />} />
           <Route path="/profile" element={<Profile />} />
           <Route path="/tutor/profile-edit" element={<TutorProfileEdit />} />
-          <Route path="/student/profile-edit" element={<StudentProfileEdit />} />
+          <Route
+            path="/student/profile-edit"
+            element={<StudentProfileEdit />}
+          />
         </Routes>
       </BrowserRouter>
     </AuthState>
