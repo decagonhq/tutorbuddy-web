@@ -39,16 +39,18 @@ const ReminderHistory = () => {
                 ))}
               </div>
               <ReminderBar />
-              <button className="flex text-sm block bg-pry w-full py-2 text-white mt-6 justify-center items-center">
-                <IoIosAddCircleOutline
-                  style={{
-                    color: "#FFF",
-                    fontSize: "28px",
-                    marginRight: "7px",
-                  }}
-                />
-                Add New
-              </button>
+              <Link to="/setreminder">
+                <button className="flex text-sm bg-pry w-full py-2 text-white mt-6 justify-center items-center">
+                  <IoIosAddCircleOutline
+                    style={{
+                      color: "#FFF",
+                      fontSize: "28px",
+                      marginRight: "7px",
+                    }}
+                  />
+                  Add New
+                </button>
+              </Link>
             </div>
           </div>
         </div>

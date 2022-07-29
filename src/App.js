@@ -50,6 +50,7 @@ function App() {
             path="/student/profile-edit"
             element={<StudentProfileEdit />}
           />
+          <Route path="/welcome" element={<Welcome />} />
         </Routes>
       </BrowserRouter>
     </AuthState>
