@@ -69,7 +69,7 @@ const Learn = () => {
             </div>
             <div className="p-4">
               <div className="text-sm text-[#758798] uppercase">
-                MATHEMATICS
+                CODING
               </div>
               <div className="text-[#21334F] mb-2">Chukwudi Kamdibe</div>
               <div className="flex items-center">
@@ -92,7 +92,7 @@ const Learn = () => {
             </div>
             <div className="p-4">
               <div className="text-sm text-[#758798] uppercase">
-                MATHEMATICS
+                GRAPHICS DESIGN
               </div>
               <div className="text-[#21334F] mb-2">Chukwudi Kamdibe</div>
               <div className="flex items-center">
@@ -117,7 +117,7 @@ const Learn = () => {
             </div>
             <div className="p-4">
               <div className="text-sm text-[#758798] uppercase">
-                MATHEMATICS
+                CHEMISTRY
               </div>
               <div className="text-[#21334F] mb-2">Chukwudi Kamdibe</div>
               <div className="flex items-center">
@@ -140,7 +140,7 @@ const Learn = () => {
             </div>
             <div className="p-4">
               <div className="text-sm text-[#758798] uppercase">
-                MATHEMATICS
+                PHYSICS
               </div>
               <div className="text-[#21334F] mb-2">Chukwudi Kamdibe</div>
               <div className="flex items-center">

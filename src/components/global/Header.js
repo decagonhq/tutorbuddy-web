@@ -1,5 +1,4 @@
 import { Link, useLocation } from "react-router-dom";
-import { useAuth } from "../../context/auth/AuthState";
 import TopModal from "../../layout/TopModal";
 import NotificationContent from "../NotificationContent";
 
@@ -28,11 +27,6 @@ const Header = () => {
               <NotificationContent />
             </TopModal>
           </div>
-          {/* {userType === "student" && (
-            <Link to="/reminder" className="mr-[39px] hidden md:block">
-              Reminder
-            </Link>
-          )} */}
           <Link to="/profile" className="flex items-center">
             <img src="/images/avatar.png" alt="avatar" />
             <span className={`${location.pathname === "/profile" ? "text-pry font-bold" : "text-black"} ml-2`}>John Doe</span>
