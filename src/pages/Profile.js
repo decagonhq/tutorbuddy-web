@@ -4,6 +4,8 @@ import { AiOutlineUser, AiOutlineLock, AiOutlineLogout } from "react-icons/ai";
 import { IoNotificationsOutline } from "react-icons/io5";
 import { BsCamera } from "react-icons/bs";
 import TopModal from "../layout/TopModal";
+import LogOutModal from "../layout/LogOutModal";
+import LogOutContent from "../components/LogOutContent";
 import NotificationContent from "../components/NotificationContent";
 
 const Profile = () => {
@@ -56,11 +58,11 @@ const Profile = () => {
                   Change Password
                 </Link>
               </li>
-              <li>
-                <Link to="/" className="flex items-start my-4 cursor-pointer">
-                  <AiOutlineLogout size="22px" className="mr-2" />
-                  Logout
-                </Link>
+              <li className="flex items-start my-4 cursor-pointer">
+                <AiOutlineLogout size="22px" className="mr-2" />
+                <LogOutModal modalButton="Logout">
+                  <LogOutContent />
+                </LogOutModal>
               </li>
             </ul>
           </div>

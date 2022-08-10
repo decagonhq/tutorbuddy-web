@@ -3,13 +3,13 @@ import DashboardLayout from "../layout/DashboardLayout";
 const TutorDashboard = () => {
   return (
     <DashboardLayout>
-      <div className="bg-[#feeaee] -mx-24 -mt-10">
+      <div className="bg-[#feeaee] lg:-mx-[8%] -mt-10 md:-mx-[18%]">
         <div className="py-5 px-24">
           <p>Welcome</p>
           <h1 className="text-2xl font-bold">John Doe</h1>
         </div>
       </div>
-      <div className="grid gap-4 grid-cols-3 my-8">
+      <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3 my-8">
         <div className="bg-[#f7f7f7] text-sm pb-2 drop-shadow-lg">
           <div className="justify-between relative">
             <p className="bg-[#FD2959] text-white px-2 py-1 rounded absolute m-4">
