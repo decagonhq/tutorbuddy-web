@@ -60,7 +60,7 @@ const Dashboard = () => {
             </div>
             <div className="text-center mt-[60px]">
               <Link
-                to={userType === "tutor" ? "/requests" : "/learn"}
+                to={userType === "tutor" ? "/tutor_dashboard" : "/learn"}
                 className="bg-pry text-white w-full md:w-[320px] py-3 inline-block"
               >
                 Explore
