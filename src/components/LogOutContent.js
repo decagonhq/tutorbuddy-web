@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 
-const LogOutContent = ({ handleCloseModal }) => {
+const LogOutContent = ({ handleclosemodal }) => {
   return (
     <div className="w-[331px] text-sm">
       <div>
@@ -16,7 +16,7 @@ const LogOutContent = ({ handleCloseModal }) => {
           Yes
         </Link>
         <button
-          onClick={handleCloseModal}
+          onClick={handleclosemodal}
           className="flex block border-2 border-[#FD2959] text-[#FD2959] w-full rounded py-4 mt-6 justify-center items-center"
         >
           No

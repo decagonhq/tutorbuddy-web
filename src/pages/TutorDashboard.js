@@ -1,6 +1,13 @@
+import { useState } from "react";
 import DashboardLayout from "../layout/DashboardLayout";
+import StatusModal from "../layout/StatusModal";
+import StatusContent from "../components/StatusContent";
 
 const TutorDashboard = () => {
+  const [status, setStatus] = useState(false);
+  const handleSetStatus = () => {
+    setStatus(!status);
+  };
   return (
     <DashboardLayout>
       <div className="bg-[#feeaee] lg:-mx-[8%] -mt-10 md:-mx-[18%]">
@@ -17,13 +24,19 @@ const TutorDashboard = () => {
             </p>
             <img src="/images/python.png" alt="course" className="w-full" />
           </div>
-          <div className="flex justify-between m-4">
+          <div className="flex justify-between m-4 relative">
             <p className="font-semibold text-sm w-[188px] h-[34px]">
               Learn Coding in Python Development fundanmental
             </p>
-            <p className="flex items-center border rounded-lg border-[#21334F] p-1">
+            <p
+              className="flex items-center border rounded-lg border-[#21334F] p-1 cursor-pointer"
+              onClick={handleSetStatus}
+            >
               Status
             </p>
+            <StatusModal status={status} setStatus={setStatus}>
+              <StatusContent />
+            </StatusModal>
           </div>
           <div className="flex justify-between my-2 mx-4">
             <div className="flex justify-center items-center">

@@ -6,14 +6,14 @@ const LogOutModal = ({ modalButton, children }) => {
   const handleAcceptModal = () => {
     setModalOpen(!modalOpen);
   };
-  const handleCloseModal = () => {
+  const handleclosemodal = () => {
     setModalOpen(false);
   };
   const childrenWithProps = React.Children.map(children, (child) => {
     // Checking isValidElement is the safe way and avoids a typescript
     // error too.
     if (React.isValidElement(child)) {
-      return React.cloneElement(child, { handleCloseModal });
+      return React.cloneElement(child, { handleclosemodal });
     }
     return child;
   });
