@@ -2,6 +2,7 @@ import { useState } from "react";
 import DashboardLayout from "../layout/DashboardLayout";
 import StatusModal from "../layout/StatusModal";
 import StatusContent from "../components/StatusContent";
+import Pagination from "../components/global/Pagination";
 
 const TutorDashboard = () => {
   const [status, setStatus] = useState(false);
@@ -123,6 +124,7 @@ const TutorDashboard = () => {
           </div>
         </div>
       </div>
+      <Pagination />
     </DashboardLayout>
   );
 };

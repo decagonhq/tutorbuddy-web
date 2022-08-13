@@ -21,6 +21,7 @@ import StudentProfileEdit from "./pages/StudentProfileEdit";
 import TutorDashboard from "./pages/TutorDashboard";
 import ReminderHistory from "./pages/ReminderHistory";
 import ReminderBoard from "./pages/ReminderBoard";
+import MyCourse from "./pages/MyCourse";
 
 function App() {
   return (
@@ -46,6 +47,7 @@ function App() {
           <Route path="/rate/:id" element={<Rate />} />
           <Route path="/profile" element={<Profile />} />
           <Route path="/tutor/profile-edit" element={<TutorProfileEdit />} />
+          <Route path="/mycourses" element={<MyCourse />} />
           <Route
             path="/student/profile-edit"
             element={<StudentProfileEdit />}
