@@ -151,7 +151,6 @@ const StudentDashboard = () => {
               </div>
             </div>
           </div>
-
           <Pagination />
         </div>
       </div>
