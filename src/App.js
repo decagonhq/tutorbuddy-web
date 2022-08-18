@@ -21,6 +21,7 @@ import StudentProfileEdit from "./pages/StudentProfileEdit";
 import TutorDashboard from "./pages/TutorDashboard";
 import ReminderHistory from "./pages/ReminderHistory";
 import ReminderBoard from "./pages/ReminderBoard";
+import Category from "./pages/Category";
 
 function App() {
   return (
@@ -51,6 +52,7 @@ function App() {
             element={<StudentProfileEdit />}
           />
           <Route path="/welcome" element={<Welcome />} />
+          <Route path="/category" element={<Category />} />
         </Routes>
       </BrowserRouter>
     </AuthState>

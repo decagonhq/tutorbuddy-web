@@ -21,11 +21,24 @@ const Learn = () => {
   }
   return (
     <DashboardLayout>
+      <div className="bg-red-100 w-full flex justify-between items-center px-4 lg:px-[100px] py-10">
+        <div>
+          <p className="text-2xl font-light">Welcome</p>
+          <h4 className="text-3xl font-bold">John Doe</h4>
+        </div>
+        <div>
+          <input
+            type="text"
+            className="border border-[#BCCACE] w-full py-2 px-6 md:mr-1 focus:outline-none"
+            placeholder="Search"
+          />
+        </div>
+      </div>
       <div className="px-4 lg:px-[100px]">
-        <h2 className="text-[32px] font-bold leading-[32px]">
+        {/* <h2 className="text-[32px] font-bold leading-[32px]">
           What would you like to learn today?
-        </h2>
-        <div className="flex flex-col md:flex-row items-center h-auto md:h-[48px] mt-6">
+        </h2> */}
+        {/* <div className="flex flex-col md:flex-row items-center h-auto md:h-[48px] mt-6">
           <input
             type="text"
             className="border border-[#BCCACE] w-full bg-black/[0.03] h-full py-2 px-6 md:mr-1 focus:outline-none"
@@ -34,12 +47,208 @@ const Learn = () => {
           <button className="bg-pry w-full md:w-[145px] text-white h-full py-2 mt-1 md:mt-0">
             Search
           </button>
+        </div> */}
+        <h2 className="mt-8 font-bold">Featured Tutors</h2>
+        <div className="mt-8 flex overflow-auto whitespace-nowrap">
+          <div className="mr-8 inline-block cursor-pointer" onClick={openModal}>
+            <img
+              src="/images/tutor-avatar.png"
+              className="object-fit"
+              alt="Avatar"
+            />
+            <p>Chimezie</p>
+            <div className="flex justify-start items-center">
+              <AiFillStar color="#FFC107" />
+              <p>4.7</p>
+            </div>
+          </div>
+          <div className="mr-8 inline-block">
+            <img
+              src="/images/tutor-avatar.png"
+              className="object-fit"
+              alt="Avatar"
+            />
+            <p>Chimezie</p>
+            <div className="flex justify-start items-center">
+              <AiFillStar color="#FFC107" />
+              <p>4.7</p>
+            </div>
+          </div>
+          <div className="mr-8 inline-block">
+            <img
+              src="/images/tutor-avatar.png"
+              className="object-fit"
+              alt="Avatar"
+            />
+            <p>Chimezie</p>
+            <div className="flex justify-start items-center">
+              <AiFillStar color="#FFC107" />
+              <p>4.7</p>
+            </div>
+          </div>
+          <div className="mr-8 inline-block">
+            <img
+              src="/images/tutor-avatar.png"
+              className="object-fit"
+              alt="Avatar"
+            />
+            <p>Chimezie</p>
+            <div className="flex justify-start items-center">
+              <AiFillStar color="#FFC107" />
+              <p>4.7</p>
+            </div>
+          </div>
+          <div className="mr-8 inline-block">
+            <img
+              src="/images/tutor-avatar.png"
+              className="object-fit"
+              alt="Avatar"
+            />
+            <p>Chimezie</p>
+            <div className="flex justify-start items-center">
+              <AiFillStar color="#FFC107" />
+              <p>4.7</p>
+            </div>
+          </div>
+          <div className="mr-8 inline-block">
+            <img
+              src="/images/tutor-avatar.png"
+              className="object-fit"
+              alt="Avatar"
+            />
+            <p>Chimezie</p>
+            <div className="flex justify-start items-center">
+              <AiFillStar color="#FFC107" />
+              <p>4.7</p>
+            </div>
+          </div>
+          <div className="mr-8 inline-block">
+            <img
+              src="/images/tutor-avatar.png"
+              className="object-fit"
+              alt="Avatar"
+            />
+            <p>Chimezie</p>
+            <div className="flex justify-start items-center">
+              <AiFillStar color="#FFC107" />
+              <p>4.7</p>
+            </div>
+          </div>
+          <div className="mr-8 inline-block">
+            <img
+              src="/images/tutor-avatar.png"
+              className="object-fit"
+              alt="Avatar"
+            />
+            <p>Chimezie</p>
+            <div className="flex justify-start items-center">
+              <AiFillStar color="#FFC107" />
+              <p>4.7</p>
+            </div>
+          </div>
+          <div className="mr-8 inline-block">
+            <img
+              src="/images/tutor-avatar.png"
+              className="object-fit"
+              alt="Avatar"
+            />
+            <p>Chimezie</p>
+            <div className="flex justify-start items-center">
+              <AiFillStar color="#FFC107" />
+              <p>4.7</p>
+            </div>
+          </div>
+          <div className="mr-8 inline-block">
+            <img
+              src="/images/tutor-avatar.png"
+              className="object-fit"
+              alt="Avatar"
+            />
+            <p>Chimezie</p>
+            <div className="flex justify-start items-center">
+              <AiFillStar color="#FFC107" />
+              <p>4.7</p>
+            </div>
+          </div>
+          <div className="mr-8 inline-block">
+            <img
+              src="/images/tutor-avatar.png"
+              className="object-fit"
+              alt="Avatar"
+            />
+            <p>Chimezie</p>
+            <div className="flex justify-start items-center">
+              <AiFillStar color="#FFC107" />
+              <p>4.7</p>
+            </div>
+          </div>
+          <div className="mr-8 inline-block">
+            <img
+              src="/images/tutor-avatar.png"
+              className="object-fit"
+              alt="Avatar"
+            />
+            <p>Chimezie</p>
+            <div className="flex justify-start items-center">
+              <AiFillStar color="#FFC107" />
+              <p>4.7</p>
+            </div>
+          </div>
+          <div className="mr-8 inline-block">
+            <img
+              src="/images/tutor-avatar.png"
+              className="object-fit"
+              alt="Avatar"
+            />
+            <p>Chimezie</p>
+            <div className="flex justify-start items-center">
+              <AiFillStar color="#FFC107" />
+              <p>4.7</p>
+            </div>
+          </div>
+          <div className="mr-8 inline-block">
+            <img
+              src="/images/tutor-avatar.png"
+              className="object-fit"
+              alt="Avatar"
+            />
+            <p>Chimezie</p>
+            <div className="flex justify-start items-center">
+              <AiFillStar color="#FFC107" />
+              <p>4.7</p>
+            </div>
+          </div>
+          <div className="mr-8 inline-block">
+            <img
+              src="/images/tutor-avatar.png"
+              className="object-fit"
+              alt="Avatar"
+            />
+            <p>Chimezie</p>
+            <div className="flex justify-start items-center">
+              <AiFillStar color="#FFC107" />
+              <p>4.7</p>
+            </div>
+          </div>
+          <div className="mr-8 inline-block">
+            <img
+              src="/images/tutor-avatar.png"
+              className="object-fit"
+              alt="Avatar"
+            />
+            <p>Chimezie</p>
+            <div className="flex justify-start items-center">
+              <AiFillStar color="#FFC107" />
+              <p>4.7</p>
+            </div>
+          </div>
         </div>
+        <h2 className="mt-8 font-bold">Recommended Courses</h2>
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5 mt-[60px]">
-          <div onClick={openModal} className="bg-white shadow cursor-pointer">
+          <div className="bg-white shadow cursor-pointer">
             <div className="">
               <img
-                src="/images/subject-1.png"
+                src="/images/subject.png"
                 className="w-full object-fit"
                 alt="subject"
               />
@@ -62,15 +271,13 @@ const Learn = () => {
           <div onClick={openModal} className="bg-white shadow cursor-pointer">
             <div className="">
               <img
-                src="/images/subject-2.png"
+                src="/images/subject.png"
                 className="w-full object-fit"
                 alt="subject"
               />
             </div>
             <div className="p-4">
-              <div className="text-sm text-[#758798] uppercase">
-                CODING
-              </div>
+              <div className="text-sm text-[#758798] uppercase">CODING</div>
               <div className="text-[#21334F] mb-2">Chukwudi Kamdibe</div>
               <div className="flex items-center">
                 <AiFillStar color="#FFC107" />
@@ -85,7 +292,7 @@ const Learn = () => {
           <div onClick={openModal} className="bg-white shadow cursor-pointer">
             <div className="">
               <img
-                src="/images/subject-3.png"
+                src="/images/subject.png"
                 className="w-full object-fit"
                 alt="subject"
               />
@@ -110,15 +317,13 @@ const Learn = () => {
           <div onClick={openModal} className="bg-white shadow cursor-pointer">
             <div className="">
               <img
-                src="/images/subject-4.png"
+                src="/images/subject.png"
                 className="w-full object-fit"
                 alt="subject"
               />
             </div>
             <div className="p-4">
-              <div className="text-sm text-[#758798] uppercase">
-                CHEMISTRY
-              </div>
+              <div className="text-sm text-[#758798] uppercase">CHEMISTRY</div>
               <div className="text-[#21334F] mb-2">Chukwudi Kamdibe</div>
               <div className="flex items-center">
                 <AiFillStar color="#FFC107" />
@@ -133,15 +338,13 @@ const Learn = () => {
           <div onClick={openModal} className="bg-white shadow cursor-pointer">
             <div className="">
               <img
-                src="/images/subject-5.png"
+                src="/images/subject.png"
                 className="w-full object-fit"
                 alt="subject"
               />
             </div>
             <div className="p-4">
-              <div className="text-sm text-[#758798] uppercase">
-                PHYSICS
-              </div>
+              <div className="text-sm text-[#758798] uppercase">PHYSICS</div>
               <div className="text-[#21334F] mb-2">Chukwudi Kamdibe</div>
               <div className="flex items-center">
                 <AiFillStar color="#FFC107" />
@@ -156,7 +359,7 @@ const Learn = () => {
           <div onClick={openModal} className="bg-white shadow cursor-pointer">
             <div className="">
               <img
-                src="/images/subject-6.png"
+                src="/images/subject.png"
                 className="w-full object-fit"
                 alt="subject"
               />

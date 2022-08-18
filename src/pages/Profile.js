@@ -57,7 +57,7 @@ const Profile = () => {
                 </Link>
               </li>
               <li>
-                <Link to="/" className="flex items-start my-4 cursor-pointer">
+                <Link to="/login" className="flex items-start my-4 cursor-pointer">
                   <AiOutlineLogout size="22px" className="mr-2" />
                   Logout
                 </Link>
