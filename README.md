@@ -5,11 +5,7 @@ Default value is `tutor`. You can also change it to `student`. Some similar page
 ## Pages
 All created pages can be found in the App.js file
 
-## Uncompleted Pages
-
-/profile
-/reminder
-/setreminder
-/viewreminder
+Student katheryndickerson@paluba.com Password: Jan3@123
+Tutor sharpewoods@baluba.com. Password: Jan2@124
 
 Pls check figma to align any leftover changes.
