@@ -23,6 +23,7 @@ const Login = () => {
 
     const loginResponse = await loginUser(user);
     if (loginResponse.response) {
+      const { data } = loginResponse.response;
       if (!data.success && data.message) {
         setError((prev) => [...prev, data.message]);
       } else if (data.errors) {
@@ -31,6 +32,7 @@ const Login = () => {
           setError((prev) => [...prev, ...data.errors[error]]);
         });
       }
+      return;
     }
     const { data } = loginResponse;
     localStorage.setItem("userToken", JSON.stringify(data.data));
