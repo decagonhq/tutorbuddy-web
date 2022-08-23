@@ -23,6 +23,7 @@ import ReminderHistory from "./pages/ReminderHistory";
 import ReminderBoard from "./pages/ReminderBoard";
 import MyCourse from "./pages/MyCourse";
 import Verify from "./pages/Verify";
+import CheckEmail from "./pages/CheckEmail";
 
 function App() {
   return (
@@ -55,6 +56,7 @@ function App() {
           />
           <Route path="/welcome" element={<Welcome />} />
           <Route path="/verify" element={<Verify />} />
+          <Route path="/password_recover" element={<CheckEmail />} />
         </Routes>
       </BrowserRouter>
     </AuthState>
