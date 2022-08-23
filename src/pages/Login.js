@@ -39,7 +39,7 @@ const Login = () => {
 
             <div className="text-center mt-10">
               Don’t have an account?{" "}
-              <Link to="/student/signup" className="text-pry">
+              <Link to="/signup" className="text-pry">
                 Create Account
               </Link>
             </div>

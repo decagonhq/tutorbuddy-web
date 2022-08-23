@@ -5,7 +5,7 @@ import StudentDashboard from "./pages/StudentDashboard";
 import Login from "./pages/Login";
 import Rate from "./pages/Rate";
 import Requests from "./pages/Requests";
-import TutorSignup from "./pages/TutorSignup";
+import Signup from "./pages/Signup";
 import StudentSignup from "./pages/StudentSignup";
 import Learn from "./pages/Learn";
 import AuthState from "./context/auth/AuthState";
@@ -22,6 +22,7 @@ import TutorDashboard from "./pages/TutorDashboard";
 import ReminderHistory from "./pages/ReminderHistory";
 import ReminderBoard from "./pages/ReminderBoard";
 import MyCourse from "./pages/MyCourse";
+import Verify from "./pages/Verify";
 
 function App() {
   return (
@@ -32,7 +33,7 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/forgot-password" element={<ForgotPassword />} />
           <Route path="/reset-password" element={<ResetPassword />} />
-          <Route path="/tutor/signup" element={<TutorSignup />} />
+          <Route path="/signup" element={<Signup />} />
           <Route path="/student/signup" element={<StudentSignup />} />
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/student-dashboard" element={<StudentDashboard />} />
@@ -53,6 +54,7 @@ function App() {
             element={<StudentProfileEdit />}
           />
           <Route path="/welcome" element={<Welcome />} />
+          <Route path="/verify" element={<Verify />} />
         </Routes>
       </BrowserRouter>
     </AuthState>
