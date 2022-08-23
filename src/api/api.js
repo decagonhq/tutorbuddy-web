@@ -9,3 +9,16 @@ export const loginUser = async (data) => {
     return err;
   }
 };
+
+export const forgotPassword = async (password) => {
+  try {
+    const response = await axios.post(
+      "/Auth/forgot-password",
+      JSON.stringify(password)
+    );
+    return response;
+  } catch (err) {
+    console.log(err);
+    return err;
+  }
+};

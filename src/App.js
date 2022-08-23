@@ -22,6 +22,7 @@ import TutorDashboard from "./pages/TutorDashboard";
 import ReminderHistory from "./pages/ReminderHistory";
 import ReminderBoard from "./pages/ReminderBoard";
 import MyCourse from "./pages/MyCourse";
+import CheckEmail from "./pages/CheckEmail";
 
 function App() {
   return (
@@ -53,6 +54,7 @@ function App() {
             element={<StudentProfileEdit />}
           />
           <Route path="/welcome" element={<Welcome />} />
+          <Route path="/password_recover" element={<CheckEmail />} />
         </Routes>
       </BrowserRouter>
     </AuthState>
