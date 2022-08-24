@@ -20,8 +20,6 @@ const Signup = () => {
     day: "",
   });
 
-  console.log("selectedUserType", selectedUserType);
-
   const handleSubjectChange = (e) => {
     setSelectedSubjects({
       id: subjects[subjectArr.indexOf(e.target.value)].id,
