@@ -40,7 +40,7 @@ const Login = () => {
     let key = "http://schemas.microsoft.com/ws/2008/06/identity/claims/role";
     let decoded = jwt_decode(token);
     if (decoded[key].toLowerCase() === "student") {
-      navigate("/student-dashboard");
+      navigate("/learn");
     } else {
       navigate("/tutor_dashboard");
     }

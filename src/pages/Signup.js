@@ -2,7 +2,6 @@ import { useEffect, useState, useRef } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "../api/axios";
 
-
 const Signup = () => {
   const navigate = useNavigate();
   const [userType, setUserType] = useState([]);
@@ -20,6 +19,8 @@ const Signup = () => {
     id: "",
     day: "",
   });
+
+  console.log("selectedUserType", selectedUserType);
 
   const handleSubjectChange = (e) => {
     setSelectedSubjects({
@@ -85,6 +86,7 @@ const Signup = () => {
           headers: { "Content-Type": "application/json", accept: "*/*" },
         }
       );
+      // console.log("RESPONSE", response);
       localStorage.setItem("email", emailRef.current.value);
       navigate("/verify");
     } catch (error) {
@@ -204,8 +206,10 @@ const Signup = () => {
               >
                 Sign Up
               </button>
+              <div className="p-2 text-center mt-10 text-pry text-bold">
+                {error}
+              </div>
             </form>
-            <div className="p-2 text-center mt-10 text-pry text-bold">{error}</div>
             <div className="text-center mt-10">
               Already have an account?{" "}
               <Link to="/login" className="text-[#17A1FA]">

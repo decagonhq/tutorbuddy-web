@@ -11,13 +11,13 @@ const TutorDashboard = () => {
   };
   return (
     <DashboardLayout>
-      <div className="bg-[#feeaee] lg:-mx-[8%] -mt-10 md:-mx-[18%]">
+      <div className="bg-red-100 w-full flex justify-between items-center py-8">
         <div className="py-5 px-24">
-          <p>Welcome</p>
-          <h1 className="text-2xl font-bold">John Doe</h1>
+          <p className="text-2xl font-light">Welcome</p>
+          <h4 className="text-3xl font-bold">John Doe</h4>
         </div>
       </div>
-      <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3 my-8">
+      <div className="px-4 lg:px-[100px] grid gap-4 md:grid-cols-2 lg:grid-cols-3 my-8">
         <div className="bg-[#f7f7f7] text-sm pb-2 drop-shadow-lg">
           <div className="justify-between relative">
             <p className="bg-[#FD2959] text-white px-2 py-1 rounded absolute m-4">
