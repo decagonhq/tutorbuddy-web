@@ -27,7 +27,10 @@ const LandingHeader = () => {
           <Link to="/login" className="mr-[39px] text-pry2 hidden md:block">
             Login
           </Link>
-          <Link to="/tutor/signup" className="mr-[39px] text-pry2 hidden md:block">
+          <Link
+            to="/signup"
+            className="mr-[39px] text-pry2 hidden md:block"
+          >
             <input
               className="text-pry2 bg-[#FD2959] w-[125px] h-[48px] rounded cursor-pointer"
               value="Get Started"

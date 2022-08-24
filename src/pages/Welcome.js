@@ -12,7 +12,7 @@ const Welcome = () => {
             <form className="md:w-2/4 px-6 mx-auto text-sm">
               <div className="relative mb-4 md:mb-0">
                 <img
-                  src="./images/welcome.png"
+                  src="./images/successful.png"
                   className="w-full rounded-lg"
                   alt="student"
                 />
