@@ -24,6 +24,7 @@ import ReminderBoard from "./pages/ReminderBoard";
 import MyCourse from "./pages/MyCourse";
 import Verify from "./pages/Verify";
 import CheckEmail from "./pages/CheckEmail";
+import ProtectedRoute from "./components/ProtectedRoute";
 
 function App() {
   return (
@@ -36,23 +37,111 @@ function App() {
           <Route path="/reset-password" element={<ResetPassword />} />
           <Route path="/signup" element={<Signup />} />
           <Route path="/student/signup" element={<StudentSignup />} />
-          <Route path="/dashboard" element={<Dashboard />} />
+          <Route
+            path="/dashboard"
+            element={
+              <ProtectedRoute>
+                <Dashboard />
+              </ProtectedRoute>
+            }
+          />
           <Route path="/student-dashboard" element={<StudentDashboard />} />
           <Route path="/tutor_dashboard" element={<TutorDashboard />} />
-          <Route path="/learn" element={<Learn />} />
-          <Route path="/requests" element={<Requests />} />
-          <Route path="/reminder_board" element={<ReminderBoard />} />
-          <Route path="/reminder" element={<Reminder />} />
-          <Route path="/setreminder" element={<SetReminder />} />
-          <Route path="/reminder_history" element={<ReminderHistory />} />
-          <Route path="/viewreminder" element={<ViewReminder />} />
-          <Route path="/rate/:id" element={<Rate />} />
-          <Route path="/profile" element={<Profile />} />
-          <Route path="/tutor/profile-edit" element={<TutorProfileEdit />} />
-          <Route path="/mycourses" element={<MyCourse />} />
+          <Route
+            path="/learn"
+            element={
+              <ProtectedRoute>
+                <Learn />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/requests"
+            element={
+              <ProtectedRoute>
+                <Requests />{" "}
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/reminder_board"
+            element={
+              <ProtectedRoute>
+                <ReminderBoard />{" "}
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/reminder"
+            element={
+              <ProtectedRoute>
+                <Reminder />{" "}
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/setreminder"
+            element={
+              <ProtectedRoute>
+                <SetReminder />{" "}
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/reminder_history"
+            element={
+              <ProtectedRoute>
+                <ReminderHistory />{" "}
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/viewreminder"
+            element={
+              <ProtectedRoute>
+                <ViewReminder />{" "}
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/rate/:id"
+            element={
+              <ProtectedRoute>
+                <Rate />{" "}
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/profile"
+            element={
+              <ProtectedRoute>
+                <Profile />{" "}
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/tutor/profile-edit"
+            element={
+              <ProtectedRoute>
+                <TutorProfileEdit />{" "}
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/mycourses"
+            element={
+              <ProtectedRoute>
+                <MyCourse />{" "}
+              </ProtectedRoute>
+            }
+          />
           <Route
             path="/student/profile-edit"
-            element={<StudentProfileEdit />}
+            element={
+              <ProtectedRoute>
+                <StudentProfileEdit />{" "}
+              </ProtectedRoute>
+            }
           />
           <Route path="/welcome" element={<Welcome />} />
           <Route path="/verify" element={<Verify />} />

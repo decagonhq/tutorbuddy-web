@@ -1,11 +1,13 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { useAuth } from "../context/auth/AuthState";
 import { loginUser } from "../api/api";
 import Error from "../components/Error";
 import jwt_decode from "jwt-decode";
 
 const Login = () => {
   const [user, setUser] = useState({ emailAddress: "", password: "" });
+  const { state, userIsLoginedIn, dispatch } = useAuth();
   const [error, setError] = useState([]);
   const navigate = useNavigate();
 
@@ -39,8 +41,9 @@ const Login = () => {
     const { token } = data.data;
     let key = "http://schemas.microsoft.com/ws/2008/06/identity/claims/role";
     let decoded = jwt_decode(token);
+    console.log(decoded);
     if (decoded[key].toLowerCase() === "student") {
-      navigate("/student-dashboard");
+      navigate("/learn");
     } else {
       navigate("/tutor_dashboard");
     }
