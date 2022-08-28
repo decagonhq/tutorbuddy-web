@@ -1,6 +1,6 @@
 import { useRef, useState } from "react";
 import ReactCodeInput from "react-code-input";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import axios from "../api/axios";
 
 const ResetPassword = () => {
@@ -19,8 +19,6 @@ const ResetPassword = () => {
   };
 
   const email = localStorage.getItem("email");
-
-  console.log("EMAIL", email);
 
   const handleReset = async (e) => {
     e.preventDefault();
