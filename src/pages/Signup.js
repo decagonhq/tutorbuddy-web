@@ -1,7 +1,7 @@
 import { useEffect, useState, useRef } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "../api/axios";
-
+import { MultiSelect } from "react-multi-select-component";
 
 const Signup = () => {
   const navigate = useNavigate();
@@ -9,31 +9,40 @@ const Signup = () => {
   const [availabilities, setAvailabilities] = useState([]);
   const [selectedUserType, setSelectedUserType] = useState("Tutor");
   const [subjects, setSubjects] = useState([]);
-  const subjectArr = subjects.map((a) => a.subject);
-  const availabilityArr = availabilities.map((a) => a.day);
   const [error, setError] = useState("");
-  const [selectedSubjects, setSelectedSubjects] = useState({
-    id: "",
-    subject: "",
-  });
-  const [selectedAvailability, setSelectedAvailability] = useState({
-    id: "",
-    day: "",
-  });
+  const [selectedAvailability, setSelectedAvailability] = useState([]);
+  const [selectedSubjects, setSelectedSubjects] = useState([]);
+  
+  const newAvailabilities = availabilities.map(
+    ({ day: label, id: value, ...rest }) => ({
+      label,
+      value,
+      ...rest,
+    })
+  );
+  const newSubjects = subjects.map(
+    ({ subject: label, id: value, ...rest }) => ({
+      label,
+      value,
+      ...rest,
+    })
+  );
 
-  const handleSubjectChange = (e) => {
-    setSelectedSubjects({
-      id: subjects[subjectArr.indexOf(e.target.value)].id,
-      subject: e.target.value,
-    });
-  };
+  const revertAvailabilities = selectedAvailability.map(
+    ({ label: day, value: id, ...rest }) => ({
+      id,
+      day,
+      ...rest,
+    })
+  );
 
-  const handleAvailabilityChange = (e) => {
-    setSelectedAvailability({
-      id: availabilities[availabilityArr.indexOf(e.target.value)].id,
-      day: e.target.value,
-    });
-  };
+  const revertSubjects = selectedSubjects.map(
+    ({ label: subject, value: id, ...rest }) => ({
+      id,
+      subject,
+      ...rest,
+    })
+  );
 
   const response = axios.get("/Auth/Register");
   useEffect(() => {
@@ -60,15 +69,12 @@ const Signup = () => {
   const handleSelectedType = (e) => {
     setSelectedUserType(e.target.value);
   };
+
+  const subjectForTutor = selectedUserType === "Tutor" ? `subjects: ${revertSubjects}` : null;
+  const availabilityForTutor = selectedUserType === "Tutor" ? `avaliabilities: ${revertAvailabilities}` : null;
   const handleSignUp = async (e) => {
     e.preventDefault();
     try {
-      const subjects = [
-        { id: selectedSubjects.id, subject: selectedSubjects.subject },
-      ];
-      const availabilities = [
-        { id: selectedAvailability.id, day: selectedAvailability.day },
-      ];
       const response = await axios.post(
         "/Auth/Register",
         JSON.stringify({
@@ -78,8 +84,8 @@ const Signup = () => {
           password: passwordRef.current.value,
           role: selectedUserType,
           bio: selectedUserType === "Tutor" ? aboutRef.current.value : "",
-          subjects: selectedUserType === "Tutor" ? subjects : "",
-          avaliabilities: selectedUserType === "Tutor" ? availabilities : "",
+          subjectForTutor,
+          availabilityForTutor
         }),
         {
           headers: { "Content-Type": "application/json", accept: "*/*" },
@@ -162,27 +168,21 @@ const Signup = () => {
                   </div>
                   <div className="mt-4">
                     <label>Availability</label>
-                    <select
-                      className="block border w-full mt-2 py-3 px-2 focus:outline-none"
-                      placeholder="Select"
-                      onChange={handleAvailabilityChange}
-                    >
-                      {availabilityArr.map((days) => (
-                        <option key={days}>{days}</option>
-                      ))}
-                    </select>
+                    <MultiSelect
+                      options={newAvailabilities}
+                      value={selectedAvailability}
+                      onChange={setSelectedAvailability}
+                      labelledBy="Select Availabilities"
+                    />
                   </div>
                   <div className="mt-4">
                     <label>Subjects</label>
-                    <select
-                      className="block border w-full mt-2 py-3 px-2 focus:outline-none"
-                      placeholder="Select"
-                      onChange={handleSubjectChange}
-                    >
-                      {subjectArr.map((subject) => (
-                        <option key={subject}>{subject}</option>
-                      ))}
-                    </select>
+                    <MultiSelect
+                      options={newSubjects}
+                      value={selectedSubjects}
+                      onChange={setSelectedSubjects}
+                      labelledBy="Select Subjects"
+                    />
                   </div>
                 </div>
               ) : (
@@ -204,8 +204,10 @@ const Signup = () => {
               >
                 Sign Up
               </button>
+              <div className="p-2 text-center mt-10 text-pry text-bold">
+                {error}
+              </div>
             </form>
-            <div className="p-2 text-center mt-10 text-pry text-bold">{error}</div>
             <div className="text-center mt-10">
               Already have an account?{" "}
               <Link to="/login" className="text-[#17A1FA]">
