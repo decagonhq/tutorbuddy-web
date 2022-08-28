@@ -18,7 +18,6 @@ const ForgotPassword = () => {
       setError([]);
     }
     const submitEmail = await forgotPassword({ emailAddress });
-    console.log(submitEmail);
     if (submitEmail.response) {
       const { data } = submitEmail.response;
       if (!data.success && data.message) {

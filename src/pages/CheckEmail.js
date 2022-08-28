@@ -14,6 +14,11 @@ const CheckEmail = () => {
             </div>
             <h2 className="text-xl py-4 font-bold">Check your mail</h2>
             <p>We have sent a password recover instruction to your account</p>
+            <Link to="/reset-password">
+              <button className="text-sm block bg-pry w-full p-3 text-white mt-6">
+                Reset Password
+              </button>
+            </Link>
           </div>
           <p className="flex flex-col items-center mt-5 md:mt-10 p-6 md:py-16">
             Did not receive the email? Check your spam filter, or{" "}
