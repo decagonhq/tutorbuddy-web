@@ -1,14 +1,13 @@
-import Header from "../components/global/Header"
+import Header from "../components/global/Header";
 
-const DashboardLayout = ({children}) => {
-    return (
-        <div className="text-[#21334F] pb-20">
-            <Header />
-            <div className="mx-auto">
-                {children}
-            </div>
-        </div>
-    )
-}
+const DashboardLayout = ({ userDetails, children }) => {
+  console.log(userDetails);
+  return (
+    <div className="text-[#21334F] pb-20">
+      <Header userDetails={userDetails} />
+      <div className="mx-auto">{children}</div>
+    </div>
+  );
+};
 
-export default DashboardLayout
+export default DashboardLayout;

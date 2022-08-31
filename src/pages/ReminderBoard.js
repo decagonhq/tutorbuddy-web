@@ -1,9 +1,12 @@
+import { useContext } from "react";
 import { Link } from "react-router-dom";
 import DashboardLayout from "../layout/DashboardLayout";
+import AuthContext from "../context/auth/authContext";
 
 const ReminderBoard = () => {
+  const { userDetails } = useContext(AuthContext);
   return (
-    <DashboardLayout>
+    <DashboardLayout userDetails={userDetails}>
       <div className="flex flex-col items-center w-full">
         <h1 className="text-3xl font-bold my-8 text-center">
           Improve and measure your skills with <br /> study reminder

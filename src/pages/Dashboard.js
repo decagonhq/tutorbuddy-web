@@ -1,18 +1,21 @@
+import { useContext } from "react";
 import { Link } from "react-router-dom";
 import { useAuth } from "../context/auth/AuthState";
 import DashboardLayout from "../layout/DashboardLayout";
+import AuthContext from "../context/auth/authContext";
 
 const Dashboard = () => {
   const {
     state: { userType },
     dispatch,
   } = useAuth();
+  const { userDetails } = useContext(AuthContext);
 
   const handleUser = (userType) => {
-    dispatch({ type: "UPDATE", userType });
+    dispatch({ type: "USERTYPE", userType });
   };
   return (
-    <DashboardLayout>
+    <DashboardLayout userType={userDetails}>
       <div className="sm:px-4 lg:px-[100px]">
         <h2 className="text-[32px] leading-[36px]">
           How would you want to use this app?
