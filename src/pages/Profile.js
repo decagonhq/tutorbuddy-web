@@ -1,37 +1,66 @@
+import { useContext, useState } from "react";
 import { Link } from "react-router-dom";
 import DashboardLayout from "../layout/DashboardLayout";
 import { AiOutlineUser, AiOutlineLock, AiOutlineLogout } from "react-icons/ai";
 import { IoNotificationsOutline } from "react-icons/io5";
 import { BsCamera } from "react-icons/bs";
+import AuthContext from "../context/auth/authContext";
 import TopModal from "../layout/TopModal";
 import LogOutModal from "../layout/LogOutModal";
 import LogOutContent from "../components/LogOutContent";
 import NotificationContent from "../components/NotificationContent";
+import { imageUpload } from "../api/api";
 
 const Profile = () => {
+  const { state, userDetails } = useContext(AuthContext);
+  console.log(state);
+
+  const handleImageUpload = async (e) => {
+    console.log(e.target.files);
+    const picture = e.target.files[0];
+    const formData = new FormData();
+
+    formData.append("ImageToUpload", picture);
+
+    console.log(formData, userDetails.id);
+
+    const upload = await imageUpload(userDetails.id, formData);
+    console.log(upload);
+  };
   return (
-    <DashboardLayout>
-      <div className="md:w-[46%] mx-auto">
+    <DashboardLayout userDetails={userDetails}>
+      <div className="lg:w-[35%] md:w-[46%] mx-auto mt-8">
         <div className="bg-white mt-5 md:mt-1 py-6 md:py-16 border-2 border-[#BCCACE]-600">
           <div className="md:w-4/8 px-6 md:px-16 mx-auto text-sm">
             <div className="flex items-center flex-col bg-[#f7f7f7] h-[187px] text-sm rounded">
-              <div className="relative">
-                <img
-                  src="/images/dummy.png"
-                  alt="avatar"
-                  className="w-[90px] rounded-full bg-black mt-8 mb-4"
-                />
-                <div className="absolute bottom-2 right-2 flex bg-white w-[25px] h-[25px] justify-center items-center rounded-full">
-                  <BsCamera
-                    style={{
-                      color: "#FD2959",
-                      fontSize: "16px",
-                    }}
+              <label htmlFor="select-image">
+                <div className="relative">
+                  <img
+                    src={userDetails.image}
+                    alt="avatar"
+                    className="w-[90px] rounded-full mt-8 mb-4"
                   />
+                  <div className="absolute bottom-2 right-2 flex bg-white w-[25px] h-[25px] justify-center items-center rounded-full">
+                    <BsCamera
+                      style={{
+                        color: "#FD2959",
+                        fontSize: "16px",
+                      }}
+                    />
+                  </div>
                 </div>
-              </div>
-
-              <span className="ml-2">Kelechi Okoli</span>
+              </label>
+              <input
+                accept="image/*"
+                type="file"
+                id="select-image"
+                style={{ display: "none" }}
+                onChange={handleImageUpload}
+                multiple={false}
+              />
+              <span className="ml-2">
+                {userDetails.name} {userDetails.surname}
+              </span>
             </div>
             <ul>
               <li>

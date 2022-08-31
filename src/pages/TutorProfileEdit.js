@@ -1,10 +1,14 @@
+import { useContext } from "react";
 import { Link } from "react-router-dom";
 import DashboardLayout from "../layout/DashboardLayout";
 import { BsCamera, BsArrowLeft } from "react-icons/bs";
+import AuthContext from "../context/auth/authContext";
 
 const TutorProfileEdit = () => {
+  const { userDetails } = useContext(AuthContext);
+
   return (
-    <DashboardLayout>
+    <DashboardLayout userDetails={userDetails}>
       <div>
         <div className="md:w-[46%] mx-auto">
           <Link
@@ -56,9 +60,7 @@ const TutorProfileEdit = () => {
               </div>
               <div className="mt-4 mb-2">
                 <label>Subjects</label>
-                <div className="mt-2 border border-[#BCCACE]-600 h-10 w-full">
-                  
-                </div>
+                <div className="mt-2 border border-[#BCCACE]-600 h-10 w-full"></div>
               </div>
               <div className="mt-4 mb-2">
                 <label>Availability</label>

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import Modal from "react-modal";
 import { AiFillStar, AiOutlineSafetyCertificate } from "react-icons/ai";
 import { GoLocation } from "react-icons/go";
@@ -6,11 +6,13 @@ import DashboardLayout from "../layout/DashboardLayout";
 import { Link } from "react-router-dom";
 import { IoClose } from "react-icons/io5";
 import { BiLeftArrowAlt, BiRightArrowAlt } from "react-icons/bi";
+import AuthContext from "../context/auth/authContext";
 
 Modal.setAppElement("#root");
 
 const Learn = () => {
   const [modalIsOpen, setIsOpen] = useState(false);
+  const { userDetails } = useContext(AuthContext);
 
   function openModal() {
     setIsOpen(true);
@@ -20,11 +22,13 @@ const Learn = () => {
     setIsOpen(false);
   }
   return (
-    <DashboardLayout>
+    <DashboardLayout userDetails={userDetails}>
       <div className="bg-red-100 w-full flex justify-between items-center px-4 lg:px-[100px] py-10">
         <div>
           <p className="text-2xl font-light">Welcome</p>
-          <h4 className="text-3xl font-bold">John Doe</h4>
+          <h4 className="text-3xl font-bold">
+            {userDetails.name} {userDetails.surname}
+          </h4>
         </div>
         <div>
           <input

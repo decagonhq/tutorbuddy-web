@@ -1,15 +1,18 @@
+import { useContext } from "react";
 import { Link } from "react-router-dom";
 import DashboardLayout from "../layout/DashboardLayout";
 import { BsArrowLeft } from "react-icons/bs";
 import { IoIosAddCircleOutline } from "react-icons/io";
 import ReminderBar from "../layout/ReminderBar";
 import { formatDate, getToday } from "../utils/helpers";
+import AuthContext from "../context/auth/authContext";
 
 const ReminderHistory = () => {
+  const { userDetails } = useContext(AuthContext);
   let date = Object.entries(formatDate());
   console.log(getToday());
   return (
-    <DashboardLayout>
+    <DashboardLayout userDetails={userDetails}>
       <div>
         <div className="md:w-[46%] mx-auto">
           <Link

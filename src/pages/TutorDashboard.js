@@ -1,16 +1,18 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import DashboardLayout from "../layout/DashboardLayout";
 import StatusModal from "../layout/StatusModal";
 import StatusContent from "../components/StatusContent";
 import Pagination from "../components/global/Pagination";
+import AuthContext from "../context/auth/authContext";
 
 const TutorDashboard = () => {
+  const { userDetails } = useContext(AuthContext);
   const [status, setStatus] = useState(false);
   const handleSetStatus = () => {
     setStatus(!status);
   };
   return (
-    <DashboardLayout>
+    <DashboardLayout userDetails={userDetails}>
       <div className="bg-red-100 w-full flex justify-between items-center py-8">
         <div className="py-5 px-24">
           <p className="text-2xl font-light">Welcome</p>

@@ -6,11 +6,13 @@ import DashboardLayout from "../layout/DashboardLayout";
 import { Link } from "react-router-dom";
 import { IoClose } from "react-icons/io5";
 import { BiLeftArrowAlt, BiRightArrowAlt } from "react-icons/bi";
+import AuthContext from "../context/auth/authContext";
 
 Modal.setAppElement("#root");
 
 const Category = () => {
   const [modalIsOpen, setIsOpen] = useState(false);
+  const { userDetails } = useContext(AuthContext);
 
   function openModal() {
     setIsOpen(true);
@@ -20,7 +22,7 @@ const Category = () => {
     setIsOpen(false);
   }
   return (
-    <DashboardLayout>
+    <DashboardLayout userDetails={userDetails}>
       <div className="bg-red-100 w-full px-4 lg:px-[100px] py-10">
         <h4 className="text-3xl font-bold mb-4">All Courses</h4>
         <input
