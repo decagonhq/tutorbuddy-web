@@ -1,8 +1,41 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import DashboardLayout from "../layout/DashboardLayout";
 import { BsCamera, BsArrowLeft } from "react-icons/bs";
+import { useRef, useState } from "react";
+import axios from "../api/axios";
 
-const StudentProfileEdit = () => {
+const ProfileEdit = () => {
+  const firstName = useRef(null);
+  const lastName = useRef(null);
+  // const email = useRef(null);
+  const navigate = useNavigate();
+  const [error, setError] = useState("");
+
+  const userEmail = localStorage.getItem("email");
+
+  console.log({userEmail, firstName, lastName});
+
+  const handleEdit = async (e) => {
+    e.preventDefault();
+
+    try {
+      const response = await axios.put(
+        "User/update-user",
+        JSON.stringify({
+          firstName: firstName.current.value,
+          lastName: lastName.current.value,
+          email: userEmail,
+        }),
+        {
+          headers: { "Content-Type": "application/json", accept: "*/*" },
+        }
+      );
+      navigate("/profile");
+    } catch (error) {
+        console.log("ERROR", error)
+      // setError(error?.response?.data?.title);
+    }
+  };
   return (
     <DashboardLayout>
       <div>
@@ -17,7 +50,7 @@ const StudentProfileEdit = () => {
             </div>
           </Link>
           <div className="bg-white mt-5 mb-5 md:mb-1 md:mt-1 py-6 md:py-16 border-2 border-[#BCCACE]-600">
-            <form className="md:w-4/8 px-6 md:px-16 mx-auto text-sm">
+            <form onSubmit={handleEdit} className="md:w-4/8 px-6 md:px-16 mx-auto text-sm">
               <div className="flex items-center flex-col h-[187px] text-sm rounded">
                 <div className="relative">
                   <img
@@ -39,11 +72,21 @@ const StudentProfileEdit = () => {
               </div>
               <h3 className="mb-4 text-lg font-bold">Profile</h3>
               <div>
-                <label>Full Name</label>
+                <label>First Name</label>
                 <input
-                  className="block border w-full mt-2 py-3 px-2"
+                  className="block border w-full mt-2 py-3 px-2 outline-none"
                   type="text"
                   placeholder="Enter full name"
+                  ref={firstName}
+                />
+              </div>
+              <div className="mt-4 mb-2">
+                <label>Last Name</label>
+                <input
+                  className="block border w-full mt-2 py-3 px-2 outline-none"
+                  type="text"
+                  placeholder="Enter full name"
+                  ref={lastName}
                 />
               </div>
               <div className="mt-4 mb-2">
@@ -52,14 +95,13 @@ const StudentProfileEdit = () => {
                   className="block border w-full mt-2 py-3 px-2"
                   type="email"
                   placeholder="Enter email"
+                  defaultValue={userEmail}
+                  // ref={email}
+                  disabled
                 />
               </div>
-              <div className="mt-4 mb-2">
-                <label>Area of Interests</label>
-                <div className="mt-2 border border-[#BCCACE]-600 h-10 w-full"></div>
-              </div>
               <Link to="/profile">
-                <button className="text-sm block rounded bg-pry w-full py-3 text-white mt-6">
+                <button type="submit" className="text-sm block rounded bg-pry w-full py-3 text-white mt-6">
                   Save
                 </button>
               </Link>
@@ -71,4 +113,4 @@ const StudentProfileEdit = () => {
   );
 };
 
-export default StudentProfileEdit;
+export default ProfileEdit;
