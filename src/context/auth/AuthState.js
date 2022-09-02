@@ -2,6 +2,7 @@ import React, { useReducer, useContext, useState, useEffect } from "react";
 import decode from "jwt-decode";
 import AuthContext from "./authContext";
 import authReducer from "./authReducer";
+import { getRefreshToken } from "../../api/api";
 
 // Create a custom hook to use the auth context
 export const useAuth = () => {
@@ -19,6 +20,7 @@ const AuthState = (props) => {
 
   const userIsLoginedIn = () => {
     const token = localStorage.getItem("userToken");
+    const userImage = localStorage.getItem("userImage");
     const user = JSON.parse(token);
     const decoded = decode(user.token);
     const key = "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/";
@@ -26,7 +28,7 @@ const AuthState = (props) => {
       id: user.id,
       name: decoded[`${key}givenname`],
       surname: decoded[`${key}surname`],
-      image: decoded[`${key}uri`],
+      image: userImage ? userImage : decoded[`${key}uri`],
     };
     setUserDetails(userObj);
     if (!token) {
@@ -55,8 +57,19 @@ const AuthState = (props) => {
   };
 
   useEffect(() => {
-    let user = localStorage.getItem("userToken");
-    if (user) {
+    let token = localStorage.getItem("userToken");
+    if (token) {
+      const user = JSON.parse(token);
+      const expired = decode(user.token).exp < Date.now() / 1000;
+      if (expired) {
+        async function getRefreshed() {
+          const updateToken = await getRefreshToken(token);
+          user.token = updateToken.data.data.newAccessToken;
+          user.refreshToken = updateToken.data.data.newRefreshToken;
+          localStorage.setItem("userToken", JSON.stringify(user));
+        }
+        getRefreshed();
+      }
       dispatch(userIsLoginedIn());
       dispatch(typeOfUser());
     }
@@ -69,6 +82,7 @@ const AuthState = (props) => {
         userIsLoginedIn,
         typeOfUser,
         userDetails: userDetails,
+        setUserDetails,
       }}
     >
       {props.children}

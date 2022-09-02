@@ -1,7 +1,5 @@
 import { useContext } from "react";
-import { Link } from "react-router-dom";
 import { RiSearchLine } from "react-icons/ri";
-import { BiLeftArrowAlt, BiRightArrowAlt } from "react-icons/bi";
 import { useAuth } from "../context/auth/AuthState";
 import DashboardLayout from "../layout/DashboardLayout";
 import { AiFillStar } from "react-icons/ai";
