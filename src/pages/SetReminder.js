@@ -57,7 +57,6 @@ const SetReminder = () => {
   const [vGroup, setVGroup] = useState(valueGroups);
   const { userDetails } = useContext(AuthContext);
 
-  console.log("RESULT", vGroup);
   const handleChange = (name, value) => {
     setVGroup({
       ...vGroup,

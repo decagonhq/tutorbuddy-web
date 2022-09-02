@@ -10,7 +10,6 @@ import AuthContext from "../context/auth/authContext";
 const ReminderHistory = () => {
   const { userDetails } = useContext(AuthContext);
   let date = Object.entries(formatDate());
-  console.log(getToday());
   return (
     <DashboardLayout userDetails={userDetails}>
       <div>

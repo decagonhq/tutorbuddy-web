@@ -8,11 +8,8 @@ const UpdatePassword = () => {
   const navigate = useNavigate();
   const [error, setError] = useState("");
 
-  const email = localStorage.getItem("email");
-
   const token = localStorage.getItem("userToken");
   const user = JSON.parse(token);
-  console.log("ID", user.id);
 
   const handleUpdate = async (e) => {
     e.preventDefault();
@@ -35,8 +32,8 @@ const UpdatePassword = () => {
       );
       navigate("/profile");
     } catch (error) {
-      console.log("ERROR", error);
-      setError(error?.response?.data?.title);
+      // console.log("ERROR", error)
+      setError(error?.response?.data?.message);
     }
   };
 

@@ -7,8 +7,6 @@ const Header = ({ userDetails }) => {
   const location = useLocation();
   const { state } = useAuth();
 
-  console.log(state);
-
   return (
     <nav className="shadow-md py-6 px-4">
       <div className="flex justify-between items-center container mx-auto">
