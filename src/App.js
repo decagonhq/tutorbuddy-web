@@ -17,7 +17,7 @@ import ForgotPassword from "./pages/ForgotPassword";
 import ResetPassword from "./pages/ResetPassword";
 import Welcome from "./pages/Welcome";
 import TutorProfileEdit from "./pages/TutorProfileEdit";
-import StudentProfileEdit from "./pages/StudentProfileEdit";
+import ProfileEdit from "./pages/ProfileEdit";
 import TutorDashboard from "./pages/TutorDashboard";
 import ReminderHistory from "./pages/ReminderHistory";
 import ReminderBoard from "./pages/ReminderBoard";
@@ -25,6 +25,7 @@ import MyCourse from "./pages/MyCourse";
 import Verify from "./pages/Verify";
 import CheckEmail from "./pages/CheckEmail";
 import ProtectedRoute from "./components/ProtectedRoute";
+import UpdatePassword from "./pages/UpdatePassword";
 
 function App() {
   return (
@@ -127,10 +128,10 @@ function App() {
             }
           />
           <Route
-            path="/tutor/profile-edit"
+            path="update-password"
             element={
               <ProtectedRoute>
-                <TutorProfileEdit />{" "}
+                <UpdatePassword />{" "}
               </ProtectedRoute>
             }
           />
@@ -143,10 +144,10 @@ function App() {
             }
           />
           <Route
-            path="/student/profile-edit"
+            path="/profile-edit"
             element={
               <ProtectedRoute>
-                <StudentProfileEdit />{" "}
+                <ProfileEdit />{" "}
               </ProtectedRoute>
             }
           />

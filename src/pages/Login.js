@@ -42,6 +42,7 @@ const Login = () => {
     const { data } = loginResponse;
     localStorage.setItem("userToken", JSON.stringify(data.data));
     const { token } = data.data;
+    localStorage.setItem("email", user.emailAddress);
     let key = "http://schemas.microsoft.com/ws/2008/06/identity/claims/role";
     let decoded = jwt_decode(token);
     dispatch(userIsLoginedIn());

@@ -63,7 +63,7 @@ const Profile = () => {
             <ul>
               <li>
                 <Link
-                  to="/student/profile-edit"
+                  to="/profile-edit"
                   className="flex items-start mt-10 cursor-pointer"
                 >
                   <AiOutlineUser size="22px" className="mr-2" />
@@ -78,7 +78,7 @@ const Profile = () => {
               </li>
               <li>
                 <Link
-                  to="/reset-password"
+                  to="/update-password"
                   className="flex items-start my-4 cursor-pointer"
                 >
                   <AiOutlineLock size="22px" className="mr-2" />
