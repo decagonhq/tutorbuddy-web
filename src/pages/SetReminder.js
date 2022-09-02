@@ -1,10 +1,11 @@
 // import { Link } from "react-router-dom"
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { BsArrowLeft } from "react-icons/bs";
 import { Link } from "react-router-dom";
 import Picker from "react-scrollable-picker";
 import _range from "lodash/range";
 import DashboardLayout from "../layout/DashboardLayout";
+import AuthContext from "../context/auth/authContext";
 
 const days = _range(1, 32).map((item) => {
   return {
@@ -54,6 +55,7 @@ const optionGroups = {
 };
 const SetReminder = () => {
   const [vGroup, setVGroup] = useState(valueGroups);
+  const { userDetails } = useContext(AuthContext);
 
   console.log("RESULT", vGroup);
   const handleChange = (name, value) => {
@@ -63,7 +65,7 @@ const SetReminder = () => {
     });
   };
   return (
-    <DashboardLayout>
+    <DashboardLayout userDetails={userDetails}>
       <div>
         <div className="md:w-[46%] mx-auto">
           <div className="bg-white mt-5 mb-5 md:mb-1 md:mt-1 py-6 md:py-8 border-2 border-[#BCCACE]-600">

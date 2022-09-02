@@ -1,7 +1,7 @@
 const authReducer = (state, action) => {
   switch (action.type) {
-    case "UPDATE":
-      return { userLogin: action.userLogin };
+    case "USERTYPE":
+      return { ...state, userType: action.userType };
     case "ISLOGGEDIN":
       return { userLogin: action.userLogin };
     default:

@@ -1,3 +1,4 @@
+import { useContext } from "react";
 import { Link } from "react-router-dom";
 import { RiSearchLine } from "react-icons/ri";
 import { BiLeftArrowAlt, BiRightArrowAlt } from "react-icons/bi";
@@ -5,14 +6,17 @@ import { useAuth } from "../context/auth/AuthState";
 import DashboardLayout from "../layout/DashboardLayout";
 import { AiFillStar } from "react-icons/ai";
 import Pagination from "../components/global/Pagination";
+import AuthContext from "../context/auth/authContext";
+
 
 const StudentDashboard = () => {
+  const { userDetails } = useContext(AuthContext);
   const {
     state: { userType },
   } = useAuth();
 
   return (
-    <DashboardLayout>
+    <DashboardLayout userDetails={userDetails}>
       <div className="sm:px-4 lg:px-[100px]">
         <h2 className="text-[32px] leading-[36px]">
           What would you like to learn today?

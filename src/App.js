@@ -47,7 +47,14 @@ function App() {
             }
           />
           <Route path="/student-dashboard" element={<StudentDashboard />} />
-          <Route path="/tutor_dashboard" element={<TutorDashboard />} />
+          <Route
+            path="/tutor_dashboard"
+            element={
+              <ProtectedRoute>
+                <TutorDashboard />
+              </ProtectedRoute>
+            }
+          />
           <Route
             path="/learn"
             element={

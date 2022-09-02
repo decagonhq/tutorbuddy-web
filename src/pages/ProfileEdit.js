@@ -1,19 +1,23 @@
 import { Link, useNavigate } from "react-router-dom";
-import DashboardLayout from "../layout/DashboardLayout";
-import { BsCamera, BsArrowLeft } from "react-icons/bs";
 import { useRef, useState } from "react";
 import axios from "../api/axios";
+import { useContext } from "react";
+import DashboardLayout from "../layout/DashboardLayout";
+import { BsCamera, BsArrowLeft } from "react-icons/bs";
+import AuthContext from "../context/auth/authContext";
 
 const ProfileEdit = () => {
+  const { userDetails } = useContext(AuthContext);
   const firstName = useRef(null);
   const lastName = useRef(null);
-  // const email = useRef(null);
   const navigate = useNavigate();
   const [error, setError] = useState("");
 
   const userEmail = localStorage.getItem("email");
 
-  console.log({userEmail, firstName, lastName});
+  const token = localStorage.getItem("userToken");
+  const user = JSON.parse(token);
+  console.log("ID", user.id);
 
   const handleEdit = async (e) => {
     e.preventDefault();
@@ -27,17 +31,21 @@ const ProfileEdit = () => {
           email: userEmail,
         }),
         {
-          headers: { "Content-Type": "application/json", accept: "*/*" },
+          headers: {
+            "Content-Type": "application/json",
+            accept: "*/*",
+            Authorization: `Bearer ${user.token}`,
+          },
         }
       );
       navigate("/profile");
     } catch (error) {
-        console.log("ERROR", error)
+      console.log("ERROR", error);
       // setError(error?.response?.data?.title);
     }
   };
   return (
-    <DashboardLayout>
+    <DashboardLayout userDetails={userDetails}>
       <div>
         <div className="md:w-[46%] mx-auto">
           <Link
@@ -50,7 +58,7 @@ const ProfileEdit = () => {
             </div>
           </Link>
           <div className="bg-white mt-5 mb-5 md:mb-1 md:mt-1 py-6 md:py-16 border-2 border-[#BCCACE]-600">
-            <form onSubmit={handleEdit} className="md:w-4/8 px-6 md:px-16 mx-auto text-sm">
+            <form className="md:w-4/8 px-6 md:px-16 mx-auto text-sm">
               <div className="flex items-center flex-col h-[187px] text-sm rounded">
                 <div className="relative">
                   <img
@@ -101,7 +109,11 @@ const ProfileEdit = () => {
                 />
               </div>
               <Link to="/profile">
-                <button type="submit" className="text-sm block rounded bg-pry w-full py-3 text-white mt-6">
+                <button
+                  type="submit"
+                  className="text-sm block rounded bg-pry w-full py-3 text-white mt-6"
+                  onClick={handleEdit}
+                >
                   Save
                 </button>
               </Link>

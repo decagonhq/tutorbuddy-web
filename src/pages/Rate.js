@@ -1,20 +1,23 @@
+import { useContext } from "react";
 import { IoChevronBack } from "react-icons/io5";
 import { MdOutlineEmail } from "react-icons/md";
 import { AiFillStar } from "react-icons/ai";
 import DashboardLayout from "../layout/DashboardLayout";
 import { useAuth } from "../context/auth/AuthState";
 import { Link } from "react-router-dom";
+import AuthContext from "../context/auth/authContext";
 
 const Rate = () => {
+  const { userDetails } = useContext(AuthContext);
   const {
     state: { userType },
   } = useAuth();
 
   return (
-    <DashboardLayout>
+    <DashboardLayout userDetails={userDetails}>
       <div className="md:px-4">
         <div className="relative text-center">
-          <Link to={userType === 'tutor' ? "/requests" : "/learn"}>
+          <Link to={userType === "tutor" ? "/requests" : "/learn"}>
             <div className="absolute left-0 flex items-center">
               <IoChevronBack />
               Back

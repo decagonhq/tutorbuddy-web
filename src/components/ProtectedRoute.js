@@ -5,6 +5,7 @@ const ProtectedRoute = ({ children }) => {
   const { state } = useAuth();
   const navigate = useNavigate();
 
+  console.log(state);
   if (!state.userLogin) {
     navigate("/login");
   }

@@ -1,9 +1,13 @@
+import { useContext } from "react";
 import DashboardLayout from "../layout/DashboardLayout";
 import ProgressBar from "../components/ProgressBar";
+import AuthContext from "../context/auth/authContext";
 
 const MyCourse = () => {
+  const { userDetails } = useContext(AuthContext);
+
   return (
-    <DashboardLayout>
+    <DashboardLayout userDetails={userDetails}>
       <div className="bg-[#feeaee] lg:-mx-[8%] -mt-10 md:-mx-[18%]">
         <div className="py-5 px-24">
           <h1 className="text-2xl font-bold">My Course</h1>

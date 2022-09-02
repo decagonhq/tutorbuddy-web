@@ -26,8 +26,11 @@ const UpdatePassword = () => {
           newPassword: passwordRef.current.value,
         }),
         {
-          headers: { "Content-Type": "application/json", accept: "*/*" },
-          Authorization: `Bearer ${user.token}`,
+          headers: {
+            "Content-Type": "application/json",
+            accept: "*/*",
+            Authorization: `Bearer ${user.token}`,
+          },
         }
       );
       navigate("/profile");
