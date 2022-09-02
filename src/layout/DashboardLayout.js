@@ -1,7 +1,6 @@
 import Header from "../components/global/Header";
 
 const DashboardLayout = ({ userDetails, children }) => {
-  console.log(userDetails);
   return (
     <div className="text-[#21334F] pb-20">
       <Header userDetails={userDetails} />

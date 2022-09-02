@@ -12,20 +12,18 @@ import NotificationContent from "../components/NotificationContent";
 import { imageUpload } from "../api/api";
 
 const Profile = () => {
-  const { state, userDetails } = useContext(AuthContext);
-  console.log(state);
+  const { state, userDetails, setUserDetails } = useContext(AuthContext);
 
   const handleImageUpload = async (e) => {
-    console.log(e.target.files);
     const picture = e.target.files[0];
     const formData = new FormData();
 
     formData.append("ImageToUpload", picture);
 
-    console.log(formData, userDetails.id);
-
     const upload = await imageUpload(userDetails.id, formData);
-    console.log(upload);
+    if (upload.data && upload.data.success) {
+      setUserDetails((prev) => ({ ...prev, image: upload.data.data }));
+    }
   };
   return (
     <DashboardLayout userDetails={userDetails}>
@@ -51,7 +49,7 @@ const Profile = () => {
                 </div>
               </label>
               <input
-                accept="image/*"
+                accept="image/png, image/jpg, image/jpeg"
                 type="file"
                 id="select-image"
                 style={{ display: "none" }}
