@@ -56,7 +56,7 @@ export const getRefreshToken = async (token) => {
   const user = JSON.parse(token);
   const userId = user.id;
   const refreshToken = user.refreshToken;
-  console.log("Token Expired");
+  console.log("Token Expired", userId, refreshToken);
   try {
     const response = await axios.post(
       "/Auth/refresh-token",
@@ -75,14 +75,12 @@ export const getRefreshToken = async (token) => {
   }
 };
 
-export const getUser = async () => {
+export const getUser = async (userId) => {
   const token = localStorage.getItem("userToken");
   const user = JSON.parse(token);
-  const userId = user.id;
   try {
     const response = await axios.get(
       `/User/${userId}`,
-      {},
       {
         headers: {
           Authorization: `Bearer ${user.token}`,
@@ -90,9 +88,47 @@ export const getUser = async () => {
       }
     );
     console.log(response);
-    // return response;
+    return response.data;
   } catch (err) {
     console.log(err);
     return err;
   }
 };
+
+export const getTutor = async (userId) => {
+  const token = localStorage.getItem("userToken");
+  const user = JSON.parse(token);
+  try {
+    const response = await axios.get(`/Tutor/${userId}`, {
+      headers: {
+        Authorization: `Bearer ${user.token}`,
+      },
+    });
+    console.log(response);
+    return response.data;
+  } catch (err) {
+    console.log(err);
+    return err;
+  }
+};
+
+export const getFeaturedTutors = async () => {
+  const token = localStorage.getItem("userToken");
+  const user = JSON.parse(token);
+  try {
+    const response = await axios.get(
+      "/Tutor/get-feature-tutors",
+      {
+        headers: {
+          Authorization: `Bearer ${user.token}`,
+          accept: "*/*"
+        },
+      }
+    );
+    console.log(response);
+    return response.data;
+  }catch(err){
+    console.log(err);
+    return err.response;
+  }
+}
