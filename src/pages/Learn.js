@@ -1,4 +1,4 @@
-import { useState, useContext } from "react";
+import { useState, useContext, useEffect } from "react";
 import Modal from "react-modal";
 import { AiFillStar, AiOutlineSafetyCertificate } from "react-icons/ai";
 import { GoLocation } from "react-icons/go";
@@ -7,20 +7,48 @@ import { Link } from "react-router-dom";
 import { IoClose } from "react-icons/io5";
 import { BiLeftArrowAlt, BiRightArrowAlt } from "react-icons/bi";
 import AuthContext from "../context/auth/authContext";
+import { getFeaturedTutors, getTutor } from "../api/api";
 
 Modal.setAppElement("#root");
 
 const Learn = () => {
   const [modalIsOpen, setIsOpen] = useState(false);
+  const [modalFeaturedTutors, setFeaturedTutors] = useState(false);
+  const [tutors, setTutors] = useState([]);
+  const [userModal, setUserModal] = useState({});
   const { userDetails } = useContext(AuthContext);
 
-  function openModal() {
+  const openModal = async (id) => {
     setIsOpen(true);
-  }
+  };
 
-  function closeModal() {
+  const closeModal = () => {
     setIsOpen(false);
-  }
+  };
+
+  const openFeatureTutor = async (id) => {
+    setFeaturedTutors(true);
+    const getTutorDetails = await getTutor(id);
+    console.log(getTutorDetails);
+    setUserModal(getTutorDetails.data);
+  };
+
+  const closeFeatureTutor = async () => {
+    setFeaturedTutors(false);
+  };
+
+  const featuredTutors = async () => {
+    const res = await getFeaturedTutors();
+    console.log(res);
+    if (res.data && res.success) {
+      setTutors(res.data);
+    }
+  };
+
+  useEffect(() => {
+    featuredTutors();
+  }, []);
+  console.log(userModal, tutors);
   return (
     <DashboardLayout userDetails={userDetails}>
       <div className="bg-red-100 w-full flex justify-between items-center px-4 lg:px-[100px] py-10">
@@ -39,213 +67,30 @@ const Learn = () => {
         </div>
       </div>
       <div className="px-4 lg:px-[100px]">
-        {/* <h2 className="text-[32px] font-bold leading-[32px]">
-          What would you like to learn today?
-        </h2> */}
-        {/* <div className="flex flex-col md:flex-row items-center h-auto md:h-[48px] mt-6">
-          <input
-            type="text"
-            className="border border-[#BCCACE] w-full bg-black/[0.03] h-full py-2 px-6 md:mr-1 focus:outline-none"
-            placeholder="Search"
-          />
-          <button className="bg-pry w-full md:w-[145px] text-white h-full py-2 mt-1 md:mt-0">
-            Search
-          </button>
-        </div> */}
         <h2 className="mt-8 font-bold">Featured Tutors</h2>
         <div className="mt-8 flex overflow-auto whitespace-nowrap">
-          <div className="mr-8 inline-block cursor-pointer" onClick={openModal}>
-            <img
-              src="/images/tutor-avatar.png"
-              className="object-fit"
-              alt="Avatar"
-            />
-            <p>Chimezie</p>
-            <div className="flex justify-start items-center">
-              <AiFillStar color="#FFC107" />
-              <p>4.7</p>
-            </div>
-          </div>
-          <div className="mr-8 inline-block">
-            <img
-              src="/images/tutor-avatar.png"
-              className="object-fit"
-              alt="Avatar"
-            />
-            <p>Chimezie</p>
-            <div className="flex justify-start items-center">
-              <AiFillStar color="#FFC107" />
-              <p>4.7</p>
-            </div>
-          </div>
-          <div className="mr-8 inline-block">
-            <img
-              src="/images/tutor-avatar.png"
-              className="object-fit"
-              alt="Avatar"
-            />
-            <p>Chimezie</p>
-            <div className="flex justify-start items-center">
-              <AiFillStar color="#FFC107" />
-              <p>4.7</p>
-            </div>
-          </div>
-          <div className="mr-8 inline-block">
-            <img
-              src="/images/tutor-avatar.png"
-              className="object-fit"
-              alt="Avatar"
-            />
-            <p>Chimezie</p>
-            <div className="flex justify-start items-center">
-              <AiFillStar color="#FFC107" />
-              <p>4.7</p>
-            </div>
-          </div>
-          <div className="mr-8 inline-block">
-            <img
-              src="/images/tutor-avatar.png"
-              className="object-fit"
-              alt="Avatar"
-            />
-            <p>Chimezie</p>
-            <div className="flex justify-start items-center">
-              <AiFillStar color="#FFC107" />
-              <p>4.7</p>
-            </div>
-          </div>
-          <div className="mr-8 inline-block">
-            <img
-              src="/images/tutor-avatar.png"
-              className="object-fit"
-              alt="Avatar"
-            />
-            <p>Chimezie</p>
-            <div className="flex justify-start items-center">
-              <AiFillStar color="#FFC107" />
-              <p>4.7</p>
-            </div>
-          </div>
-          <div className="mr-8 inline-block">
-            <img
-              src="/images/tutor-avatar.png"
-              className="object-fit"
-              alt="Avatar"
-            />
-            <p>Chimezie</p>
-            <div className="flex justify-start items-center">
-              <AiFillStar color="#FFC107" />
-              <p>4.7</p>
-            </div>
-          </div>
-          <div className="mr-8 inline-block">
-            <img
-              src="/images/tutor-avatar.png"
-              className="object-fit"
-              alt="Avatar"
-            />
-            <p>Chimezie</p>
-            <div className="flex justify-start items-center">
-              <AiFillStar color="#FFC107" />
-              <p>4.7</p>
-            </div>
-          </div>
-          <div className="mr-8 inline-block">
-            <img
-              src="/images/tutor-avatar.png"
-              className="object-fit"
-              alt="Avatar"
-            />
-            <p>Chimezie</p>
-            <div className="flex justify-start items-center">
-              <AiFillStar color="#FFC107" />
-              <p>4.7</p>
-            </div>
-          </div>
-          <div className="mr-8 inline-block">
-            <img
-              src="/images/tutor-avatar.png"
-              className="object-fit"
-              alt="Avatar"
-            />
-            <p>Chimezie</p>
-            <div className="flex justify-start items-center">
-              <AiFillStar color="#FFC107" />
-              <p>4.7</p>
-            </div>
-          </div>
-          <div className="mr-8 inline-block">
-            <img
-              src="/images/tutor-avatar.png"
-              className="object-fit"
-              alt="Avatar"
-            />
-            <p>Chimezie</p>
-            <div className="flex justify-start items-center">
-              <AiFillStar color="#FFC107" />
-              <p>4.7</p>
-            </div>
-          </div>
-          <div className="mr-8 inline-block">
-            <img
-              src="/images/tutor-avatar.png"
-              className="object-fit"
-              alt="Avatar"
-            />
-            <p>Chimezie</p>
-            <div className="flex justify-start items-center">
-              <AiFillStar color="#FFC107" />
-              <p>4.7</p>
-            </div>
-          </div>
-          <div className="mr-8 inline-block">
-            <img
-              src="/images/tutor-avatar.png"
-              className="object-fit"
-              alt="Avatar"
-            />
-            <p>Chimezie</p>
-            <div className="flex justify-start items-center">
-              <AiFillStar color="#FFC107" />
-              <p>4.7</p>
-            </div>
-          </div>
-          <div className="mr-8 inline-block">
-            <img
-              src="/images/tutor-avatar.png"
-              className="object-fit"
-              alt="Avatar"
-            />
-            <p>Chimezie</p>
-            <div className="flex justify-start items-center">
-              <AiFillStar color="#FFC107" />
-              <p>4.7</p>
-            </div>
-          </div>
-          <div className="mr-8 inline-block">
-            <img
-              src="/images/tutor-avatar.png"
-              className="object-fit"
-              alt="Avatar"
-            />
-            <p>Chimezie</p>
-            <div className="flex justify-start items-center">
-              <AiFillStar color="#FFC107" />
-              <p>4.7</p>
-            </div>
-          </div>
-          <div className="mr-8 inline-block">
-            <img
-              src="/images/tutor-avatar.png"
-              className="object-fit"
-              alt="Avatar"
-            />
-            <p>Chimezie</p>
-            <div className="flex justify-start items-center">
-              <AiFillStar color="#FFC107" />
-              <p>4.7</p>
-            </div>
-          </div>
+          {tutors?.length > 0
+            ? tutors.map((el) => (
+                <div
+                  key={el.id}
+                  className="mr-8 inline-block cursor-pointer"
+                  onClick={() => openFeatureTutor(el.id)}
+                >
+                  <div className="w-[68px]">
+                    <img
+                      src={el.avatar}
+                      className="object-fit"
+                      alt={el.fullname}
+                    />
+                  </div>
+                  <p>{el.fullname}</p>
+                  <div className="flex justify-start items-center">
+                    <AiFillStar color="#FFC107" />
+                    <p>{el?.rate}</p>
+                  </div>
+                </div>
+              ))
+            : null}
         </div>
         <h2 className="mt-8 font-bold">Recommended Courses</h2>
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5 mt-[60px]">
@@ -385,6 +230,61 @@ const Learn = () => {
           </div>
         </div>
         <Modal
+          isOpen={modalFeaturedTutors}
+          onRequestClose={closeFeatureTutor}
+          className="w-full md:w-[694px] bg-gray-50 absolute bottom-0 md:bottom-2/4 right-2/4 transform translate-x-2/4 md:translate-y-2/4 shadow-sm outline-none overflow-auto"
+          overlayClassName="fixed top-0 left-0 right-0 bottom-0 bg-gray-800 bg-opacity-40"
+          contentLabel="Example Modal"
+        >
+          <div className="flex justify-between items-center p-8 border border-black/[0.16] border-bottom">
+            <h2 className="font-[600]">Tutor Profile</h2>
+            <button onClick={closeFeatureTutor}>
+              <IoClose size="24px" />
+            </button>
+          </div>
+          <div className="p-8">
+            <div className="flex">
+              <div className="w-[90px]">
+                <img src={userModal.avatar} alt="tutor" />
+              </div>
+              <div className="ml-4">
+                <div className="text-lg font-bold mb-1.5">
+                  {userModal.fullName}
+                </div>
+                <div className="flex items-center mb-1.5">
+                  <AiOutlineSafetyCertificate color="#14A800" size="18px" />{" "}
+                  <span className="text-[#758798] ml-1.5">Certified Tutor</span>
+                </div>
+                <div className="flex items-center">
+                  <GoLocation />{" "}
+                  <span className="text-[#758798] ml-1.5">Lagos, Nigeria</span>
+                </div>
+              </div>
+            </div>
+            <div className="my-6">
+              <h3 className="font-bold mb-2">About</h3>
+              <p>{userModal.bioNote ? userModal.bioNote : "NIL"}</p>
+            </div>
+            <div className="flex flex-col md:flex-row justify-between mb-6">
+              <div className="md:w-[40%] md:mb-4">
+                <h3 className="font-bold mb-2">Expertise</h3>
+                <div className="flex">
+                  {userModal.subject?.length > 0
+                    ? userModal.subject?.map((sub, ind) => (
+                        <div
+                          key={ind}
+                          className="bg-black/[0.03] px-2 py-1 rounded-[40px] mr-2"
+                        >
+                          {sub}
+                        </div>
+                      ))
+                    : "NIL"}
+                </div>
+              </div>
+            </div>
+          </div>
+        </Modal>
+        <Modal
           isOpen={modalIsOpen}
           onRequestClose={closeModal}
           className="w-full md:w-[694px] bg-gray-50 absolute bottom-0 md:bottom-2/4 right-2/4 transform translate-x-2/4 md:translate-y-2/4 shadow-sm outline-none overflow-auto"
@@ -399,8 +299,8 @@ const Learn = () => {
           </div>
           <div className="p-8">
             <div className="flex">
-              <div>
-                <img src="/images/tutor-avatar.png" alt="tutor" />
+              <div className="w-[70px]">
+                <img src="./images/tutor-avatar.png" widthalt="tutor" />
               </div>
               <div className="ml-4">
                 <div className="text-lg font-bold mb-1.5">Chukwudi Kamdibe</div>
