@@ -16,7 +16,9 @@ const TutorDashboard = () => {
       <div className="bg-red-100 w-full flex justify-between items-center py-8">
         <div className="py-5 px-24">
           <p className="text-2xl font-light">Welcome</p>
-          <h4 className="text-3xl font-bold">John Doe</h4>
+          <h4 className="text-3xl font-bold">
+            {userDetails.name} {userDetails.surname}
+          </h4>
         </div>
       </div>
       <div className="px-4 lg:px-[100px] grid gap-4 md:grid-cols-2 lg:grid-cols-3 my-8">
