@@ -64,6 +64,11 @@ const AuthState = (props) => {
       if (expired) {
         async function getRefreshed() {
           const updateToken = await getRefreshToken(token);
+          if (!updateToken.response.data.success) {
+            console.log(updateToken);
+            alert("Refresh token not updated server error");
+            return;
+          }
           user.token = updateToken.data.data.newAccessToken;
           user.refreshToken = updateToken.data.data.newRefreshToken;
           localStorage.setItem("userToken", JSON.stringify(user));
