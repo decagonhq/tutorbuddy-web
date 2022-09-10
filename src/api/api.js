@@ -79,14 +79,11 @@ export const getUser = async (userId) => {
   const token = localStorage.getItem("userToken");
   const user = JSON.parse(token);
   try {
-    const response = await axios.get(
-      `/User/${userId}`,
-      {
-        headers: {
-          Authorization: `Bearer ${user.token}`,
-        },
-      }
-    );
+    const response = await axios.get(`/User/${userId}`, {
+      headers: {
+        Authorization: `Bearer ${user.token}`,
+      },
+    });
     console.log(response);
     return response.data;
   } catch (err) {
@@ -116,19 +113,58 @@ export const getFeaturedTutors = async () => {
   const token = localStorage.getItem("userToken");
   const user = JSON.parse(token);
   try {
+    const response = await axios.get("/Tutor/get-feature-tutors", {
+      headers: {
+        Authorization: `Bearer ${user.token}`,
+        accept: "*/*",
+      },
+    });
+    console.log(response);
+    return response.data;
+  } catch (err) {
+    console.log(err);
+    return err.response;
+  }
+};
+
+export const getAllSubjects = async (size = 10, num = 1) => {
+  const token = localStorage.getItem("userToken");
+  const user = JSON.parse(token);
+  try {
     const response = await axios.get(
-      "/Tutor/get-feature-tutors",
+      `/Tutor/get-all-subject-with-categories?pageSize=${size}&pageNumber=${num}`,
       {
         headers: {
           Authorization: `Bearer ${user.token}`,
-          accept: "*/*"
+          accept: "*/*",
         },
       }
     );
     console.log(response);
     return response.data;
-  }catch(err){
+  } catch (err) {
     console.log(err);
     return err.response;
   }
-}
+};
+
+export const getAllRecommendedSubjects = async (size = 10, num = 1) => {
+  const token = localStorage.getItem("userToken");
+  const user = JSON.parse(token);
+  try {
+    const response = await axios.get(
+      `/Tutor/get-all-recommend-subject?pageSize=${size}&pageNumber=${num}`,
+      {
+        headers: {
+          Authorization: `Bearer ${user.token}`,
+          accept: "*/*",
+        },
+      }
+    );
+    console.log(response);
+    return response.data;
+  } catch (err) {
+    console.log(err);
+    return err.response;
+  }
+};
