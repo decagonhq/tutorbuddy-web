@@ -1,27 +1,28 @@
 import { useState, useContext, useEffect } from "react";
 import Modal from "react-modal";
-import {
-  AiFillStar,
-  AiOutlineStar,
-  AiOutlineSafetyCertificate,
-} from "react-icons/ai";
-import { GoLocation } from "react-icons/go";
+import { AiFillStar, AiOutlineStar } from "react-icons/ai";
 import { Link } from "react-router-dom";
 import { IoClose } from "react-icons/io5";
 import { BsArrowLeft } from "react-icons/bs";
-import AuthContext from "../context/auth/authContext";
-import { getAllSubjects } from "../api/api";
+import { getAllSubjects, getSubjectByID } from "../api/api";
+import { formatDate2 } from "../utils/helpers";
 
 Modal.setAppElement("#root");
 
 const LearnCategory = (props) => {
   const [modalIsOpen, setIsOpen] = useState(false);
   const [viewSubjects, setViewSubjects] = useState([]);
-  const { userDetails } = useContext(AuthContext);
+  const [activeSubject, setActiveSubject] = useState({});
   const { setShowCourses } = props;
 
   const openModal = async (id) => {
-    setIsOpen(true);
+    console.log(id);
+    const subject = await getSubjectByID(id);
+    console.log(subject);
+    if (subject.success) {
+      setActiveSubject(subject.data);
+      setIsOpen(true);
+    }
   };
 
   const closeModal = () => {
@@ -58,7 +59,7 @@ const LearnCategory = (props) => {
                 <div
                   key={course._id}
                   className="flex flex-col bg-white shadow cursor-pointer"
-                  onClick={openModal}
+                  onClick={() => openModal(course.tutorSubjectId)}
                 >
                   <div className="mb-2">
                     <img
@@ -107,61 +108,57 @@ const LearnCategory = (props) => {
         contentLabel="Example Modal"
       >
         <div className="flex justify-between items-center p-8 border border-black/[0.16] border-bottom">
-          <h2 className="font-[600]">Tutor Profile</h2>
+          <h2 className="font-[600]">About the course</h2>
           <button onClick={closeModal}>
             <IoClose size="24px" />
           </button>
         </div>
-        <div className="p-8">
+        <div
+          style={{ "var(--image-url)": activeSubject.thumbnail }}
+          className="p-8 pt-4 mb-4 bg-[image:var(--image-url)] w-full h-[161px] relative"
+        >
+          <h2 className="font-[600] my-2">{activeSubject.topic}</h2>
+          <p className="text-sm my-2">{activeSubject.description}</p>
+          <div className="flex items-center my-2">
+            <span>{activeSubject.rating}</span>
+            {Array(5)
+              .fill(0)
+              .map((item, i) => {
+                if (activeSubject.rating > i) {
+                  return <AiFillStar color="#FFC107" key={i} />;
+                } else {
+                  return <AiOutlineStar color="#f0f0f0" key={i} />;
+                }
+              })}
+          </div>
+          <p className="text-xs">
+            Uploaded {formatDate2(activeSubject.createdAt)}
+          </p>
+          <p className="text-xs">
+            ₦{activeSubject.price} /{activeSubject.unitOfPrice}
+          </p>
+        </div>
+        <div className="m-8 mb-4">
+          <h2 className="font-[600] border-b border-black/[0.16] pb-2 w-1/2">
+            About Tutor
+          </h2>
+        </div>
+        <div className="pt-2 p-8">
           <div className="flex">
             <div className="w-[70px]">
-              <img src="./images/tutor-avatar.png" widthalt="tutor" />
+              <img src="./images/tutor-avatar.png" alt="tutor" />
             </div>
             <div className="ml-4">
-              <div className="text-lg font-bold mb-1.5">Chukwudi Kamdibe</div>
-              <div className="flex items-center mb-1.5">
-                <AiOutlineSafetyCertificate color="#14A800" size="18px" />{" "}
-                <span className="text-[#758798] ml-1.5">Certified Tutor</span>
-              </div>
-              <div className="flex items-center">
-                <GoLocation />{" "}
-                <span className="text-[#758798] ml-1.5">Lagos, Nigeria</span>
-              </div>
+              <div className="text-lg font-bold mb-1">{activeSubject.name}</div>
+              <p>{activeSubject.noOfCourses}</p>
             </div>
           </div>
           <div className="my-6">
-            <h3 className="font-bold mb-2">About</h3>
-            <p>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. At nibh
-              quam odio sit vestibulum sagittis urna. Velit fermentum, accumsan,
-              egestas sit volutpat.
-            </p>
-          </div>
-          <div className="flex flex-col md:flex-row justify-between mb-6">
-            <div className="md:w-[40%] md:mb-4">
-              <h3 className="font-bold mb-2">Expertise</h3>
-              <div className="flex">
-                <div className="bg-black/[0.03] px-2 py-1 rounded-[40px]">
-                  Physics
-                </div>
-                <div className="bg-black/[0.03] px-2 py-1 rounded-[40px] mx-2">
-                  Coding
-                </div>
-                <div className="bg-black/[0.03] px-2 py-1 rounded-[40px]">
-                  Chemistry
-                </div>
-              </div>
-            </div>
-            <div className="md:w-[40%]">
-              <h3 className="font-bold mb-2">Hourly Rate</h3>
-              <div>
-                <div>N1,250 per/hr</div>
-              </div>
-            </div>
+            <p>{activeSubject.bioNote}</p>
           </div>
           <div className="border border-black/[0.08]">
             <div className="flex justify-between items-center px-2 py-3 border border-bottom border-black/[0.16]">
-              <div className="font-bold">Ratings (6)</div>
+              <div className="font-bold">Ratings ({activeSubject.rating})</div>
               <Link
                 className="px-2 py-1 font-[600] text-pry bg-pry/[0.1] rounded"
                 to="/rate/1"
@@ -169,13 +166,17 @@ const LearnCategory = (props) => {
                 Rate Tutor
               </Link>
             </div>
-            <div className="p-2 border border-bottom border-black/[0.08]">
-              <h6>Awesome tutor</h6>
-              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. </p>
-            </div>
-            <div className="p-2">
-              <h6>Awesome tutor</h6>
-              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. </p>
+            <div>
+              {activeSubject.tutorComments > 0 ? (
+                <div className="p-2 border border-bottom border-black/[0.08]">
+                  <h6>Awesome tutor</h6>
+                  <p>
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.{" "}
+                  </p>
+                </div>
+              ) : (
+                <p>No Comments Yet</p>
+              )}
             </div>
           </div>
           <button className="bg-pry py-3 text-white w-full md:w-320px mt-6">

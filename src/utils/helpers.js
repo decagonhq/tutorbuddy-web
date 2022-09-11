@@ -87,8 +87,14 @@ export const formatDate = () => {
 // (int) First day of the month for a given year from 1 - 7
 // 1 => Sunday, 7 => Saturday
 export const getMonthFirstDay = (month = THIS_MONTH, year = THIS_YEAR) => {
-  console.log(new Date().getDay());
-  console.log(daysArray());
-  console.log(formatDate());
   return +new Date(`${year}-${zeroPad(month, 2)}-01`).getDay();
 };
+
+export const formatDate2 = (time) => {
+  const date = new Date(time);
+  const day = date.getDate();
+  const month = date.getMonth();
+  const year = date.getFullYear();
+  console.log(`${day}/${month}${year}`);
+  return `${day}/${month}/${year}`;
+}
