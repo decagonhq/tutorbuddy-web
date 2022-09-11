@@ -60,7 +60,6 @@ const Learn = () => {
 
   const recommendedCourses = async () => {
     const res = await getAllRecommendedSubjects();
-    console.log(res);
     if (res.success) {
       setRecommendCourses(res.data.pageItems);
     }
@@ -70,7 +69,6 @@ const Learn = () => {
     featuredTutors();
     recommendedCourses();
   }, []);
-  console.log(recommendCourses);
   return (
     <DashboardLayout userDetails={userDetails}>
       {!showCourseByCategory ? (

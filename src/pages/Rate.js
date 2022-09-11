@@ -16,8 +16,6 @@ const Rate = () => {
   const navigate = useNavigate();
   const commentRef = useRef(null);
 
-  console.log("COMMENT", commentRef);
-
   const {
     state: { userType },
   } = useAuth();
@@ -111,11 +109,11 @@ const Rate = () => {
                     type="button"
                     key={index}
                     className={index <= (hover || rating) ? "on" : "off"}
-                    onClick={() => {
-                      setRating(index);
-                      handleStudentRating();
+                    onClick={handleStudentRating}
+                    onMouseEnter={() => {
+                      setHover(index)
+                      setRating(index)
                     }}
-                    onMouseEnter={() => setHover(index)}
                     onMouseLeave={() => setHover(rating)}
                   >
                     <span className="star">&#9733;</span>

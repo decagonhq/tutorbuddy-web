@@ -32,7 +32,6 @@ const UpdatePassword = () => {
       );
       navigate("/profile");
     } catch (error) {
-      // console.log("ERROR", error)
       setError(error?.response?.data?.message);
     }
   };

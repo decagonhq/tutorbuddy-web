@@ -65,7 +65,6 @@ const AuthState = (props) => {
         async function getRefreshed() {
           const updateToken = await getRefreshToken(token);
           if (!updateToken.response.data.success) {
-            console.log(updateToken);
             alert("Refresh token not updated server error");
             return;
           }

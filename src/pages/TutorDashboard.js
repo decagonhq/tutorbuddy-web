@@ -17,8 +17,6 @@ const TutorDashboard = () => {
   const [selectedId, setSelectedId] = useState("");
   const [statusValue, setStatusValue] = useState("");
 
-  console.log({ sessionDetails });
-
   const onRequest = () => {
     setStatusValue(0);
   };
@@ -105,7 +103,6 @@ const TutorDashboard = () => {
     response
       .then((result) => result)
       .then((data) => {
-        console.log("STUDENT", data);
         setSessionDetails(data.data.data.pageItems);
       });
   }, []);

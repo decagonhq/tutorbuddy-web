@@ -38,7 +38,6 @@ const ResetPassword = () => {
       );
       navigate("/login");
     } catch (error) {
-        console.log("ERROR", error)
       setError(error?.response?.data?.title);
     }
   };
