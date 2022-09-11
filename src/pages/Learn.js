@@ -40,7 +40,6 @@ const Learn = () => {
   const openFeatureTutor = async (id) => {
     setFeaturedTutors(true);
     const getTutorDetails = await getTutor(id);
-    console.log(getTutorDetails);
     setUserModal(getTutorDetails.data);
   };
 
@@ -54,7 +53,6 @@ const Learn = () => {
 
   const featuredTutors = async () => {
     const res = await getFeaturedTutors();
-    console.log(res);
     if (res.data && res.success) {
       setTutors(res.data);
     }
@@ -120,7 +118,7 @@ const Learn = () => {
                       <div className="w-[68px]">
                         <img
                           src={el.avatar}
-                          className="object-fit"
+                          className="object-fit rounded-full"
                           alt={el.fullname}
                         />
                       </div>

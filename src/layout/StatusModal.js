@@ -1,55 +1,13 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { MdOutlineClose } from "react-icons/md";
 
 const StatusModal = ({
   status,
   setStatus,
   statusId,
-  onRequest,
-  onAccepted,
-  onInProgress,
-  onCompleted,
-  onAbandoned,
-  onCancel,
-  handleStatusUpdate,
+  testingChange
 }) => {
   const handleCloseModal = () => {
-    setStatus(false);
-  };
-
-  const testing = () => {
-    onRequest();
-    handleStatusUpdate();
-    setStatus(false);
-  };
-
-  const onHandleAccepted = () => {
-    onAccepted();
-    handleStatusUpdate();
-    setStatus(false);
-  };
-
-  const onHandleInProgress = () => {
-    onInProgress();
-    handleStatusUpdate();
-    setStatus(false);
-  };
-
-  const onHandleInCompleted = () => {
-    onCompleted();
-    handleStatusUpdate();
-    setStatus(false);
-  };
-
-  const onHandleAbandoned = () => {
-    onAbandoned();
-    handleStatusUpdate();
-    setStatus(false);
-  };
-
-  const onHandleCancel = () => {
-    onCancel();
-    handleStatusUpdate();
     setStatus(false);
   };
 
@@ -67,23 +25,23 @@ const StatusModal = ({
           <hr />
           <div className="p-4">
             <p
-              onClick={testing}
-              className="mb-2 mt-4 text-[#FFC107] cursor-pointer"
+              onClick={()=>testingChange(0)}
+              className="mb-2 mt-4 cursor-pointer"
             >
               Requested
             </p>
             <hr />
 
             <p
-              onClick={onHandleAccepted}
-              className="mb-2 mt-4 text-[#FFC107] cursor-pointer"
+              onClick={()=>testingChange(1)}
+              className="mb-2 mt-4 text-sky-600 cursor-pointer"
             >
               Accepted
             </p>
             <hr />
 
             <p
-              onClick={onHandleInProgress}
+              onClick={()=>testingChange(2)}
               className="mb-2 mt-4 text-[#FFC107] cursor-pointer"
             >
               Progress
@@ -91,7 +49,7 @@ const StatusModal = ({
             <hr />
 
             <p
-              onClick={onHandleInCompleted}
+              onClick={()=>testingChange(3)}
               className="mb-2 mt-4 text-[#14A800] cursor-pointer"
             >
               Completed
@@ -99,7 +57,7 @@ const StatusModal = ({
             <hr />
 
             <p
-              onClick={onHandleAbandoned}
+              onClick={()=>testingChange(4)}
               className="mb-2 mt-4 text-[#FD2959] cursor-pointer"
             >
               Abandoned
@@ -107,7 +65,7 @@ const StatusModal = ({
             <hr />
 
             <p
-              onClick={onHandleCancel}
+              onClick={()=>testingChange(5)}
               className="mb-2 mt-4 text-[#FD2959] cursor-pointer"
             >
               Canceled

@@ -1,10 +1,12 @@
 import { useState, useContext, useEffect } from "react";
+import { AiFillCheckCircle } from "react-icons/ai";
 import DashboardLayout from "../layout/DashboardLayout";
 import StatusModal from "../layout/StatusModal";
 import StatusContent from "../components/StatusContent";
 import Pagination from "../components/global/Pagination";
 import AuthContext from "../context/auth/authContext";
 import axios from "../api/axios";
+import { Link } from "react-router-dom";
 
 const TutorDashboard = () => {
   const { userDetails } = useContext(AuthContext);
@@ -15,7 +17,7 @@ const TutorDashboard = () => {
   const [selectedId, setSelectedId] = useState("");
   const [statusValue, setStatusValue] = useState("");
 
-  console.log({selectedId, statusValue})
+  console.log({ sessionDetails });
 
   const onRequest = () => {
     setStatusValue(0);
@@ -36,6 +38,27 @@ const TutorDashboard = () => {
     setStatusValue(5);
   };
 
+  const testingChange = async (numState) => {
+    try {
+      await axios.patch(
+        `/Session/${selectedId}`,
+        JSON.stringify({
+          status: numState,
+        }),
+        {
+          headers: {
+            "Content-Type": "application/json",
+            accept: "*/*",
+            Authorization: `Bearer ${user.token}`,
+          },
+        }
+      );
+      window.location.reload();
+    } catch (error) {
+      console.log("ERROR", error);
+    }
+  };
+
   const response = axios.get(`/Session/${user.id}/tutor`, {
     headers: {
       "Content-Type": "application/json",
@@ -45,8 +68,6 @@ const TutorDashboard = () => {
   });
 
   const handleStatusUpdate = async () => {
-    console.log("HELLO THERE");
-    // e.preventDefault();
     try {
       await axios.patch(
         `/Session/${selectedId}`,
@@ -66,16 +87,33 @@ const TutorDashboard = () => {
     }
   };
 
+  const statusColor = (item) => {
+    return item.status === 0
+      ? "text-black"
+      : item.status === 1
+      ? "text-sky-600"
+      : item.status === 2
+      ? "text-[#FFC107]"
+      : item.status === 3
+      ? "text-[#14A800]"
+      : item.status === 4
+      ? "text-[#FD2959]"
+      : "text-[#FD2959]";
+  };
+
   useEffect(() => {
     response
       .then((result) => result)
       .then((data) => {
+        console.log("STUDENT", data);
         setSessionDetails(data.data.data.pageItems);
       });
   }, []);
 
-  const handleSetStatus = () => {
-    setStatus(status? status : !status);
+  const handleSetStatus = (student, studentImage) => {
+    setStatus(status ? status : !status);
+    localStorage.setItem("userName", student);
+    localStorage.setItem("studentImage", studentImage);
   };
   return (
     <DashboardLayout userDetails={userDetails}>
@@ -87,8 +125,8 @@ const TutorDashboard = () => {
           </h4>
         </div>
       </div>
-      {sessionDetails?.map((item) => (
-        <div className="px-4 lg:px-[100px] grid gap-4 md:grid-cols-2 lg:grid-cols-3 my-8 z-0">
+      <div className="px-4 lg:px-[100px] grid gap-4 md:grid-cols-2 lg:grid-cols-3 my-8 z-0">
+        {sessionDetails?.map((item) => (
           <div className="bg-[#f7f7f7] text-sm pb-2 drop-shadow-lg">
             <div className="justify-between relative">
               <p className="bg-[#FD2959] text-white px-2 py-1 rounded absolute m-4">
@@ -104,7 +142,7 @@ const TutorDashboard = () => {
                 className="flex items-center border rounded-lg border-[#21334F] p-1 cursor-pointer"
                 key={item.sessionId}
                 onClick={() => {
-                  handleSetStatus();
+                  handleSetStatus(item.student, item.studentImage);
                   setSelectedId(item.sessionId);
                 }}
               >
@@ -121,6 +159,7 @@ const TutorDashboard = () => {
                 onCompleted={onCompleted}
                 onInProgress={onInProgress}
                 handleStatusUpdate={handleStatusUpdate}
+                testingChange={testingChange}
               >
                 <StatusContent id={item.sessionId} />
               </StatusModal>
@@ -134,7 +173,13 @@ const TutorDashboard = () => {
                 />
                 <span>{item.student}</span>
               </div>
-              <span className="text-[#758798]">Rate Student</span>
+              {item.status === 3 ? (
+                <Link to={`/rate/${item.sessionId}`}>
+                  <span className="text-pry">Rate Student</span>
+                </Link>
+              ) : (
+                <span className="text-[#758798]">Rate Student</span>
+              )}
             </div>
             <div className="flex items-center my-2 mx-4">
               <img src="/images/Time.png" alt="date" />
@@ -155,8 +200,8 @@ const TutorDashboard = () => {
               </span>
             </div>
             <div className="flex items-center my-2 mx-4">
-              <img src="/images/Progress.png" alt="progress" />
-              <span className="ml-2 text-[#FFC107]">
+              <AiFillCheckCircle size={20} className={`${statusColor(item)}`} />
+              <span className={`ml-2 ${statusColor(item)}`}>
                 {item.status === 0
                   ? "Requested"
                   : item.status === 1
@@ -171,8 +216,8 @@ const TutorDashboard = () => {
               </span>
             </div>
           </div>
-        </div>
-      ))}
+        ))}
+      </div>
       <Pagination />
     </DashboardLayout>
   );
