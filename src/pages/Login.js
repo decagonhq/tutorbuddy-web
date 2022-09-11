@@ -47,7 +47,6 @@ const Login = () => {
     let decoded = jwt_decode(token);
     dispatch(userIsLoginedIn());
     dispatch(typeOfUser());
-    console.log(decoded);
     if (decoded[key].toLowerCase() === "student") {
       navigate("/learn");
     } else {
