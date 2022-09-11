@@ -30,7 +30,6 @@ const LearnCategory = (props) => {
 
   const allSubjects = async () => {
     const res = await getAllSubjects();
-    console.log(res);
     if (res.success) {
       setViewSubjects(res.data.pageItems);
     }
@@ -39,7 +38,6 @@ const LearnCategory = (props) => {
   useEffect(() => {
     allSubjects();
   }, []);
-  console.log(viewSubjects);
   return (
     <>
       <div

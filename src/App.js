@@ -26,6 +26,7 @@ import Verify from "./pages/Verify";
 import CheckEmail from "./pages/CheckEmail";
 import ProtectedRoute from "./components/ProtectedRoute";
 import UpdatePassword from "./pages/UpdatePassword";
+import SuccessfulComment from "./pages/SuccessfulComment";
 
 function App() {
   return (
@@ -148,6 +149,14 @@ function App() {
             element={
               <ProtectedRoute>
                 <ProfileEdit />{" "}
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/successful-comment"
+            element={
+              <ProtectedRoute>
+                <SuccessfulComment />{" "}
               </ProtectedRoute>
             }
           />
