@@ -37,7 +37,6 @@ const Verify = () => {
     }
   };
 
-
   return (
     <div className="bg-[#E5E5E5] min-h-screen">
       <div className="text-[#21334F] container mx-auto py-10 md:py-20">
@@ -46,8 +45,14 @@ const Verify = () => {
             <img src="/images/logo.svg" className="mx-auto" alt="logo" />
           </div>
           <div className="bg-white mt-5 md:mt-10 py-6 md:py-16">
-            <form className="md:w-2/4 px-6 mx-auto text-sm">
-              <h3 className="mb-10 text-lg font-bold">Verify Account</h3>
+            <form className="md:w-2/4 px-6 mx-auto text-sm text-center">
+                <img
+                  src="./images/verify.svg"
+                  className="w-full rounded-lg mb-4"
+                  alt="student"
+                />
+              <h3 className="mb-4 text-lg font-bold">Check your mail</h3>
+              <p className="mb-4">Enter the OTP sent to your email address</p>
               <div className="mb-8">
                 <ReactCodeInput
                   id="pinCode"
@@ -58,10 +63,10 @@ const Verify = () => {
                   value={pinCode}
                 />
               </div>
-              <div>
+              {/* <div>
                 Didn't get the code?{" "}
                 <span className="text-[#17A1FA]">Resend code</span>
-              </div>
+              </div> */}
               <button
                 className="text-sm block bg-pry w-full py-3 text-white mt-6"
                 onClick={handleVerify}

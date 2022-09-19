@@ -1,11 +1,14 @@
-import { useState, useContext, useEffect } from "react";
+import { useState, useEffect } from "react";
 import Modal from "react-modal";
 import { AiFillStar, AiOutlineStar } from "react-icons/ai";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { IoClose } from "react-icons/io5";
 import { BsArrowLeft } from "react-icons/bs";
 import { getAllSubjects, getSubjectByID } from "../api/api";
 import { formatDate2 } from "../utils/helpers";
+import DateTimePicker from "react-datetime-picker";
+import axios from "../api/axios";
+import { BiCalendar } from "react-icons/bi";
 
 Modal.setAppElement("#root");
 
@@ -13,13 +16,27 @@ const LearnCategory = (props) => {
   const [modalIsOpen, setIsOpen] = useState(false);
   const [viewSubjects, setViewSubjects] = useState([]);
   const [activeSubject, setActiveSubject] = useState({});
+  const [start, setStart] = useState(new Date().toISOString());
+  const [end, setEnd] = useState(new Date().toISOString());
+  const [showSchedule, setShowSchedule] = useState(true);
+  const [tutorSubjectId, setTutorSubjectId] = useState("");
+  const [error, setError] = useState("");
+  const [sessionTutor, setSessionTutor] = useState("");
+
+  const startDate = (date) => {
+    setStart(new Date(date).toISOString());
+  };
+
+  const endDate = (date) => {
+    setEnd(new Date(date).toISOString());
+  };
   const { setShowCourses } = props;
 
   const openModal = async (id) => {
-    console.log(id);
+    setTutorSubjectId(id);
     const subject = await getSubjectByID(id);
-    console.log(subject);
     if (subject.success) {
+      setSessionTutor(subject.data.name);
       setActiveSubject(subject.data);
       setIsOpen(true);
     }
@@ -39,6 +56,36 @@ const LearnCategory = (props) => {
   useEffect(() => {
     allSubjects();
   }, []);
+
+  const navigate = useNavigate();
+  const token = localStorage.getItem("userToken");
+  const user = JSON.parse(token);
+
+  const handleSessionCreate = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await axios.post(
+        "/Session",
+        JSON.stringify({
+          tutorSubjectId: tutorSubjectId,
+          studentId: user.id,
+          startTime: start,
+          endTime: end,
+        }),
+        {
+          headers: {
+            "Content-Type": "application/json",
+            accept: "*/*",
+            Authorization: `Bearer ${user.token}`,
+          },
+        }
+      );
+      localStorage.setItem("sessionTutor", sessionTutor);
+      navigate("/request-sent");
+    } catch (error) {
+      setError(error?.response?.data?.message);
+    }
+  };
   return (
     <>
       <div
@@ -105,36 +152,38 @@ const LearnCategory = (props) => {
         overlayClassName="fixed top-0 left-0 right-0 bottom-0 bg-gray-800 bg-opacity-40"
         contentLabel="Example Modal"
       >
-        <div className="flex justify-between items-center p-8 border border-black/[0.16] border-bottom">
+        <div className="flex justify-between items-center p-4 border border-black/[0.16] border-bottom">
           <h2 className="font-[600]">About the course</h2>
           <button onClick={closeModal}>
             <IoClose size="24px" />
           </button>
         </div>
         <div
-          style={{ "var(--image-url)": activeSubject.thumbnail }}
-          className="p-8 pt-4 mb-4 bg-[image:var(--image-url)] w-full h-[161px] relative"
+          style={{ backgroundImage: `url(${activeSubject.thumbnail})` }}
+          className="w-full h-[190px] bg-cover bg-center bg-no-repeat text-white"
         >
-          <h2 className="font-[600] my-2">{activeSubject.topic}</h2>
-          <p className="text-sm my-2">{activeSubject.description}</p>
-          <div className="flex items-center my-2">
-            <span>{activeSubject.rating}</span>
-            {Array(5)
-              .fill(0)
-              .map((item, i) => {
-                if (activeSubject.rating > i) {
-                  return <AiFillStar color="#FFC107" key={i} />;
-                } else {
-                  return <AiOutlineStar color="#f0f0f0" key={i} />;
-                }
-              })}
+          <div className="bg-gradient-to-b from-black opacity-90 p-8 pt-4 mb-4">
+            <h2 className="font-[600] my-2">{activeSubject.topic}</h2>
+            <p className="text-sm my-2">{activeSubject.description}</p>
+            <div className="flex items-center my-2">
+              <span>{activeSubject.rating}</span>
+              {Array(5)
+                .fill(0)
+                .map((item, i) => {
+                  if (activeSubject.rating > i) {
+                    return <AiFillStar color="#FFC107" key={i} />;
+                  } else {
+                    return <AiOutlineStar color="#f0f0f0" key={i} />;
+                  }
+                })}
+            </div>
+            <p className="text-xs">
+              Uploaded {formatDate2(activeSubject.createdAt)}
+            </p>
+            <p className="text-xs">
+              ₦{activeSubject.price} /{activeSubject.unitOfPrice}
+            </p>
           </div>
-          <p className="text-xs">
-            Uploaded {formatDate2(activeSubject.createdAt)}
-          </p>
-          <p className="text-xs">
-            ₦{activeSubject.price} /{activeSubject.unitOfPrice}
-          </p>
         </div>
         <div className="m-8 mb-4">
           <h2 className="font-[600] border-b border-black/[0.16] pb-2 w-1/2">
@@ -144,7 +193,7 @@ const LearnCategory = (props) => {
         <div className="pt-2 p-8">
           <div className="flex">
             <div className="w-[70px]">
-              <img src="./images/tutor-avatar.png" alt="tutor" />
+              <img src={activeSubject.avatar} className="rounded-full" alt="tutor" />
             </div>
             <div className="ml-4">
               <div className="text-lg font-bold mb-1">{activeSubject.name}</div>
@@ -154,30 +203,62 @@ const LearnCategory = (props) => {
           <div className="my-6">
             <p>{activeSubject.bioNote}</p>
           </div>
+          {showSchedule ? (
+            <div className="mb-4">
+              <h2
+                className="text-pry font-bold cursor-pointer"
+                onClick={() => setShowSchedule(false)}
+              >
+                Schedule Time
+              </h2>
+            </div>
+          ) : (
+            <div className="mb-4">
+              <p>Start Date</p>
+              <DateTimePicker
+                calendarIcon={<BiCalendar className="mr-2" size={20} />}
+                onChange={startDate}
+                value={new Date(start)}
+                format="yyyy-MM-dd h:mm:ss a"
+              />
+              <p>End Date</p>
+              <DateTimePicker
+                calendarIcon={<BiCalendar className="mr-2" size={20} />}
+                onChange={endDate}
+                value={new Date(end)}
+                format="yyyy-MM-dd h:mm:ss a"
+              />
+              <h2
+                className="text-pry font-bold cursor-pointer mt-4"
+                onClick={() => setShowSchedule(true)}
+              >
+                Clear Schedule
+              </h2>
+            </div>
+          )}
           <div className="border border-black/[0.08]">
             <div className="flex justify-between items-center px-2 py-3 border border-bottom border-black/[0.16]">
               <div className="font-bold">Ratings ({activeSubject.rating})</div>
-              <Link
-                className="px-2 py-1 font-[600] text-pry bg-pry/[0.1] rounded"
-                to="/rate/1"
-              >
-                Rate Tutor
-              </Link>
             </div>
             <div>
-              {activeSubject.tutorComments > 0 ? (
-                <div className="p-2 border border-bottom border-black/[0.08]">
-                  <h6>Awesome tutor</h6>
-                  <p>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.{" "}
-                  </p>
+              {activeSubject.tutorComments ? (
+                <div className="p-2 border border-bottom border-black/[0.08] overflow-y-auto h-12">
+                  {activeSubject.tutorComments.map((comment) => (
+                    <div className="pb-2">
+                      {comment ? <p>{comment}</p> : ""}
+                    </div>
+                  ))}
                 </div>
               ) : (
                 <p>No Comments Yet</p>
               )}
             </div>
           </div>
-          <button className="bg-pry py-3 text-white w-full md:w-320px mt-6">
+          <div className="mt-4 text-pry font-bold">{error}</div>
+          <button
+            onClick={handleSessionCreate}
+            className="bg-pry py-3 text-white w-full md:w-320px mt-6"
+          >
             Engage Tutors
           </button>
         </div>

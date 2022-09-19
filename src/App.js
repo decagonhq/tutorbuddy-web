@@ -1,22 +1,17 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import LandingPage from "./pages/LandingPage";
 import Dashboard from "./pages/Dashboard";
-import StudentDashboard from "./pages/StudentDashboard";
 import Login from "./pages/Login";
 import Rate from "./pages/Rate";
-import Requests from "./pages/Requests";
 import Signup from "./pages/Signup";
-import StudentSignup from "./pages/StudentSignup";
 import Learn from "./pages/Learn";
 import AuthState from "./context/auth/AuthState";
 import Reminder from "./pages/Reminder";
 import Profile from "./pages/Profile";
 import SetReminder from "./pages/SetReminder";
-import ViewReminder from "./pages/ViewReminder";
 import ForgotPassword from "./pages/ForgotPassword";
 import ResetPassword from "./pages/ResetPassword";
 import Welcome from "./pages/Welcome";
-import TutorProfileEdit from "./pages/TutorProfileEdit";
 import ProfileEdit from "./pages/ProfileEdit";
 import TutorDashboard from "./pages/TutorDashboard";
 import ReminderHistory from "./pages/ReminderHistory";
@@ -27,6 +22,7 @@ import CheckEmail from "./pages/CheckEmail";
 import ProtectedRoute from "./components/ProtectedRoute";
 import UpdatePassword from "./pages/UpdatePassword";
 import SuccessfulComment from "./pages/SuccessfulComment";
+import RequestSent from "./pages/RequestSent";
 
 function App() {
   return (
@@ -38,7 +34,6 @@ function App() {
           <Route path="/forgot-password" element={<ForgotPassword />} />
           <Route path="/reset-password" element={<ResetPassword />} />
           <Route path="/signup" element={<Signup />} />
-          <Route path="/student/signup" element={<StudentSignup />} />
           <Route
             path="/dashboard"
             element={
@@ -47,7 +42,6 @@ function App() {
               </ProtectedRoute>
             }
           />
-          <Route path="/student-dashboard" element={<StudentDashboard />} />
           <Route
             path="/tutor_dashboard"
             element={
@@ -61,14 +55,6 @@ function App() {
             element={
               <ProtectedRoute>
                 <Learn />
-              </ProtectedRoute>
-            }
-          />
-          <Route
-            path="/requests"
-            element={
-              <ProtectedRoute>
-                <Requests />{" "}
               </ProtectedRoute>
             }
           />
@@ -101,14 +87,6 @@ function App() {
             element={
               <ProtectedRoute>
                 <ReminderHistory />{" "}
-              </ProtectedRoute>
-            }
-          />
-          <Route
-            path="/viewreminder"
-            element={
-              <ProtectedRoute>
-                <ViewReminder />{" "}
               </ProtectedRoute>
             }
           />
@@ -157,6 +135,14 @@ function App() {
             element={
               <ProtectedRoute>
                 <SuccessfulComment />{" "}
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/request-sent"
+            element={
+              <ProtectedRoute>
+                <RequestSent />{" "}
               </ProtectedRoute>
             }
           />

@@ -6,12 +6,13 @@ import {
   AiOutlineSafetyCertificate,
 } from "react-icons/ai";
 import { GoLocation } from "react-icons/go";
-import { Link } from "react-router-dom";
+import { BiCalendar } from "react-icons/bi";
+import { useNavigate } from "react-router-dom";
 import { IoClose } from "react-icons/io5";
+import DateTimePicker from "react-datetime-picker";
 import AuthContext from "../context/auth/authContext";
 import DashboardLayout from "../layout/DashboardLayout";
 import LearnCategory from "./LearnCategory";
-import Pagination from "../components/global/Pagination";
 import {
   getFeaturedTutors,
   getTutor,
@@ -19,6 +20,7 @@ import {
   getSubjectByID,
 } from "../api/api";
 import { formatDate2 } from "../utils/helpers";
+import axios from "../api/axios";
 
 Modal.setAppElement("#root");
 
@@ -31,11 +33,27 @@ const Learn = () => {
   const [userModal, setUserModal] = useState({});
   const [recommendCourses, setRecommendCourses] = useState([]);
   const { userDetails } = useContext(AuthContext);
+  const [start, setStart] = useState(new Date().toISOString());
+  const [end, setEnd] = useState(new Date().toISOString());
+  const [showSchedule, setShowSchedule] = useState(true);
+  const [tutorSubjectId, setTutorSubjectId] = useState("");
+  const [error, setError] = useState("");
+  const [sessionTutor, setSessionTutor] = useState("");
 
+  
+  const startDate = (date) => {
+    setStart(new Date(date).toISOString());
+  };
+
+  const endDate = (date) => {
+    setEnd(new Date(date).toISOString());
+  };
+  
   const openModal = async (id) => {
+    setTutorSubjectId(id);
     const subject = await getSubjectByID(id);
-    console.log(subject);
     if (subject.success) {
+      setSessionTutor(subject.data.name);
       setActiveSubject(subject.data);
       setIsOpen(true);
     }
@@ -77,6 +95,36 @@ const Learn = () => {
     featuredTutors();
     recommendedCourses();
   }, []);
+
+  const navigate = useNavigate();
+  const token = localStorage.getItem("userToken");
+  const user = JSON.parse(token);
+
+  const handleSessionCreate = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await axios.post(
+        "/Session",
+        JSON.stringify({
+          tutorSubjectId: tutorSubjectId,
+          studentId: user.id,
+          startTime: start,
+          endTime: end,
+        }),
+        {
+          headers: {
+            "Content-Type": "application/json",
+            accept: "*/*",
+            Authorization: `Bearer ${user.token}`,
+          },
+        }
+      );
+      localStorage.setItem("sessionTutor", sessionTutor);
+      navigate("/request-sent");
+    } catch (error) {
+      setError(error?.response?.data?.message);
+    }
+  };
   return (
     <DashboardLayout userDetails={userDetails}>
       {!showCourseByCategory ? (
@@ -128,7 +176,7 @@ const Learn = () => {
                           alt={el.fullname}
                         />
                       </div>
-                      <p>{el.fullname}</p>
+                      <p>{el.fullname.substring(0, 8)}...</p>
                       <div className="flex justify-start items-center">
                         <AiFillStar color="#FFC107" />
                         <p>{el?.rate}</p>
@@ -256,46 +304,52 @@ const Learn = () => {
               overlayClassName="fixed top-0 left-0 right-0 bottom-0 bg-gray-800 bg-opacity-40"
               contentLabel="Example Modal"
             >
-              <div className="flex justify-between items-center p-8 border border-black/[0.16] border-bottom">
+              <div className="flex justify-between items-center p-4 border border-black/[0.16] border-bottom">
                 <h2 className="font-[600]">About the course</h2>
                 <button onClick={closeModal}>
                   <IoClose size="24px" />
                 </button>
               </div>
-              <div
+              {/* <div
                 style={{ "var(--image-url)": activeSubject.thumbnail }}
                 className="p-8 pt-4 mb-4 bg-[image:var(--image-url)] w-full h-[161px] relative"
+              > */}
+              <div
+                style={{ backgroundImage: `url(${activeSubject.thumbnail})` }}
+                className="w-full h-[190px] bg-cover bg-center bg-no-repeat text-white"
               >
-                <h2 className="font-[600] my-2">{activeSubject.topic}</h2>
-                <p className="text-sm my-2">{activeSubject.description}</p>
-                <div className="flex items-center my-2">
-                  <span>{activeSubject.rating}</span>
-                  {Array(5)
-                    .fill(0)
-                    .map((item, i) => {
-                      if (activeSubject.rating > i) {
-                        return <AiFillStar color="#FFC107" key={i} />;
-                      } else {
-                        return <AiOutlineStar color="#f0f0f0" key={i} />;
-                      }
-                    })}
+                <div className="bg-gradient-to-b from-black opacity-90 p-8 pt-4 mb-4">
+                  <h2 className="font-[600] my-2">{activeSubject.topic}</h2>
+                  <p className="text-sm my-2">{activeSubject.description}</p>
+                  <div className="flex items-center my-2">
+                    <span>{activeSubject.rating}</span>
+                    {Array(5)
+                      .fill(0)
+                      .map((item, i) => {
+                        if (activeSubject.rating > i) {
+                          return <AiFillStar color="#FFC107" key={i} />;
+                        } else {
+                          return <AiOutlineStar color="#f0f0f0" key={i} />;
+                        }
+                      })}
+                  </div>
+                  <p className="text-xs">
+                    Uploaded {formatDate2(activeSubject.createdAt)}
+                  </p>
+                  <p className="text-xs">
+                    ₦{activeSubject.price} /{activeSubject.unitOfPrice}
+                  </p>
                 </div>
-                <p className="text-xs">
-                  Uploaded {formatDate2(activeSubject.createdAt)}
-                </p>
-                <p className="text-xs">
-                  ₦{activeSubject.price} /{activeSubject.unitOfPrice}
-                </p>
               </div>
               <div className="m-8 mb-4">
                 <h2 className="font-[600] border-b border-black/[0.16] pb-2 w-1/2">
-                  About Tutor
+                  About the Tutor
                 </h2>
               </div>
               <div className="pt-2 p-8">
                 <div className="flex">
                   <div className="w-[70px]">
-                    <img src="./images/tutor-avatar.png" alt="tutor" />
+                    <img src={activeSubject.avatar} className="rounded-full" alt="tutor" />
                   </div>
                   <div className="ml-4">
                     <div className="text-lg font-bold mb-1">
@@ -307,33 +361,63 @@ const Learn = () => {
                 <div className="my-6">
                   <p>{activeSubject.bioNote}</p>
                 </div>
+                {showSchedule ? (
+                  <div
+                    className="mb-4 flex items-center cursor-pointer"
+                    onClick={() => setShowSchedule(false)}
+                  >
+                    <BiCalendar className="mr-2" size={20} color="#dc2626" />
+                    <h2 className="text-[#dc2626] font-bold">Schedule Time</h2>
+                  </div>
+                ) : (
+                  <div className="mb-4">
+                    <p>Start Date</p>
+                    <DateTimePicker
+                      calendarIcon={<BiCalendar className="mr-2" size={20} />}
+                      onChange={startDate}
+                      value={new Date(start)}
+                      format="yyyy-MM-dd h:mm:ss a"
+                    />
+                    <p>End Date</p>
+                    <DateTimePicker
+                      calendarIcon={<BiCalendar className="mr-2" size={20} />}
+                      onChange={endDate}
+                      value={new Date(end)}
+                      format="yyyy-MM-dd h:mm:ss a"
+                    />
+                    <h2
+                      className="text-[#dc2626] font-bold cursor-pointer mt-4"
+                      onClick={() => setShowSchedule(true)}
+                    >
+                      Clear Schedule
+                    </h2>
+                  </div>
+                )}
                 <div className="border border-black/[0.08]">
                   <div className="flex justify-between items-center px-2 py-3 border border-bottom border-black/[0.16]">
                     <div className="font-bold">
                       Ratings ({activeSubject.rating})
                     </div>
-                    <Link
-                      className="px-2 py-1 font-[600] text-pry bg-pry/[0.1] rounded"
-                      to="/rate/1"
-                    >
-                      Rate Tutor
-                    </Link>
                   </div>
                   <div>
-                    {activeSubject.tutorComments > 0 ? (
-                      <div className="p-2 border border-bottom border-black/[0.08]">
-                        <h6>Awesome tutor</h6>
-                        <p>
-                          Lorem ipsum dolor sit amet, consectetur adipiscing
-                          elit.{" "}
-                        </p>
+                    {activeSubject.tutorComments ? (
+                      <div className="p-2 border border-bottom border-black/[0.08] overflow-y-auto h-12">
+                        {activeSubject.tutorComments.map((comment) => (
+                          <div className="pb-2">
+                            <p>{comment}</p>
+                          </div>
+                        ))}
                       </div>
                     ) : (
                       <p>No Comments Yet</p>
                     )}
                   </div>
                 </div>
-                <button className="bg-pry py-3 text-white w-full md:w-320px mt-6">
+                <div className="mt-4 text-pry font-bold">{error}</div>
+                <button
+                  onClick={handleSessionCreate}
+                  className="bg-pry py-3 text-white w-full md:w-320px mt-6"
+                >
                   Engage Tutors
                 </button>
               </div>
@@ -342,7 +426,7 @@ const Learn = () => {
         ) : (
           <LearnCategory setShowCourses={setShowCourseByCategory} />
         )}
-        <Pagination />
+        {/* <Pagination /> */}
       </div>
     </DashboardLayout>
   );
