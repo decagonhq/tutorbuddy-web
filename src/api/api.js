@@ -170,6 +170,27 @@ export const getAllRecommendedSubjects = async (size = 10, num = 1) => {
   }
 };
 
+export const getMyCourses = async (size = 10, num = 1) => {
+  const token = localStorage.getItem("userToken");
+  const user = JSON.parse(token);
+  try {
+    const response = await axios.get(
+      `/Session/${user.id}/student`,
+      {
+        headers: {
+          Authorization: `Bearer ${user.token}`,
+          accept: "*/*",
+        },
+      }
+    );
+    // console.log(response);
+    return response.data;
+  } catch (err) {
+    console.log(err);
+    return err.response;
+  }
+};
+
 export const getSubjectByID = async (id) => {
   const token = localStorage.getItem("userToken");
   const user = JSON.parse(token);

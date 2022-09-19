@@ -1,13 +1,12 @@
 import { useContext, useState, useRef } from "react";
 import { IoChevronBack } from "react-icons/io5";
-import { MdOutlineEmail } from "react-icons/md";
-import { AiFillStar } from "react-icons/ai";
 import DashboardLayout from "../layout/DashboardLayout";
 import { useAuth } from "../context/auth/AuthState";
 import { Link, useNavigate } from "react-router-dom";
 import AuthContext from "../context/auth/authContext";
 import axios from "../api/axios";
 import "../styles/rate.css";
+import { BiErrorCircle } from "react-icons/bi";
 
 const Rate = () => {
   const { userDetails } = useContext(AuthContext);
@@ -15,6 +14,7 @@ const Rate = () => {
   const [hover, setHover] = useState(0);
   const navigate = useNavigate();
   const commentRef = useRef(null);
+  const [inputErrors, setInputErrors] = useState("");
 
   const {
     state: { userType },
@@ -23,13 +23,31 @@ const Rate = () => {
 
   const token = localStorage.getItem("userToken");
   const userName = localStorage.getItem("userName");
+  const tutorDetails = localStorage.getItem("tutorDetails");
+  const tutor = JSON.parse(tutorDetails);
   const studentImage = localStorage.getItem("studentImage");
   const user = JSON.parse(token);
+
+  function validate(rating, comment) {
+    const errors = [];
+
+    if (rating.length === 0) {
+      errors.push("Select a rating");
+    }
+
+    if (comment.length === 0) {
+      errors.push("Comment can't be empty");
+    }
+
+    return errors;
+  }
 
   const handleStudentRating = async () => {
     try {
       await axios.post(
-        `/Session/${idFromUrl}/rate-student`,
+        `/Session/${idFromUrl}/${
+          user.roles[0] === "Tutor" ? "rate-student" : "rate-tutor"
+        }`,
         JSON.stringify({
           ratings: rating,
         }),
@@ -49,8 +67,15 @@ const Rate = () => {
   const handleStudentComment = async (e) => {
     e.preventDefault();
     try {
+      const errors = validate(rating, commentRef.current.value);
+      if (errors.length > 0) {
+        setInputErrors({ errors });
+        return;
+      }
       await axios.post(
-        `/Session/${idFromUrl}/student-comment`,
+        `/Session/${idFromUrl}/${
+          user.roles[0] === "Tutor" ? "student-comment" : "tutor-comment"
+        }`,
         JSON.stringify({
           comment: commentRef.current.value,
         }),
@@ -71,7 +96,9 @@ const Rate = () => {
     <DashboardLayout userDetails={userDetails}>
       <div className="mt-8 md:px-4">
         <div className="relative text-center">
-          <Link to={user.roles[0] === "Tutor" ? "/tutor_dashboard" : "/learn"}>
+          <Link
+            to={user.roles[0] === "Tutor" ? "/tutor_dashboard" : "/mycourses"}
+          >
             <div className="absolute left-0 flex items-center">
               <IoChevronBack />
               Back
@@ -84,15 +111,13 @@ const Rate = () => {
         <form className="mt-[60px] py-7 px-4 lg:px-[70px] lg:w-2/4 mx-auto border">
           <div className="flex items-center flex-wrap mb-[80px]">
             <img
-              src={
-                user.roles[0] === "Tutor" ? studentImage : "/images/user-md.png"
-              }
+              src={user.roles[0] === "Tutor" ? studentImage : tutor.tutorAvatar}
               className="mr-2 w-12 rounded-full"
               alt="user"
             />
             <div>
               <div className="text-lg font-bold">
-                {user.roles[0] === "Tutor" ? userName : "Tutor Name"}
+                {user.roles[0] === "Tutor" ? userName : tutor.tutorName}
               </div>
             </div>
           </div>
@@ -111,8 +136,8 @@ const Rate = () => {
                     className={index <= (hover || rating) ? "on" : "off"}
                     onClick={handleStudentRating}
                     onMouseEnter={() => {
-                      setHover(index)
-                      setRating(index)
+                      setHover(index);
+                      setRating(index);
                     }}
                     onMouseLeave={() => setHover(rating)}
                   >
@@ -136,6 +161,12 @@ const Rate = () => {
             >
               Send
             </button>
+            {inputErrors?.errors?.map((error) => (
+              <div key={error} className="flex items-center text-pry p-1 mt-2">
+                <BiErrorCircle />
+                <p className="ml-2">{error}</p>
+              </div>
+            ))}
           </div>
         </form>
       </div>

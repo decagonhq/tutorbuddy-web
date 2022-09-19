@@ -2,6 +2,7 @@ import { useEffect, useState, useRef } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "../api/axios";
 import { MultiSelect } from "react-multi-select-component";
+import { BiErrorCircle } from "react-icons/bi";
 
 const Signup = () => {
   const navigate = useNavigate();
@@ -12,7 +13,8 @@ const Signup = () => {
   const [error, setError] = useState("");
   const [selectedAvailability, setSelectedAvailability] = useState([]);
   const [selectedSubjects, setSelectedSubjects] = useState([]);
-  
+  const [inputErrors, setInputErrors] = useState("");
+
   const newAvailabilities = availabilities.map(
     ({ day: label, id: value, ...rest }) => ({
       label,
@@ -70,11 +72,67 @@ const Signup = () => {
     setSelectedUserType(e.target.value);
   };
 
-  const subjectForTutor = selectedUserType === "Tutor" ? `subjects: ${revertSubjects}` : null;
-  const availabilityForTutor = selectedUserType === "Tutor" ? `avaliabilities: ${revertAvailabilities}` : null;
+  const subjectForTutor =
+    selectedUserType === "Tutor" ? `subjects: ${revertSubjects}` : null;
+  const availabilityForTutor =
+    selectedUserType === "Tutor"
+      ? `avaliabilities: ${revertAvailabilities}`
+      : null;
+
+  function validate(
+    firstName,
+    lastName,
+    email,
+    about,
+    availability,
+    subject,
+    password
+  ) {
+    const errors = [];
+
+    if (firstName.length === 0) {
+      errors.push("First Name can't be empty");
+    }
+
+    if (lastName.length === 0) {
+      errors.push("Last Name can't be empty");
+    }
+    if (email.length === 0) {
+      errors.push("Email can't be empty");
+    }
+
+    if (about.length === 0) {
+      errors.push("About can't be empty");
+    }
+    if (availability.length === 0) {
+      errors.push("Select one or more availability");
+    }
+
+    if (subject.length === 0) {
+      errors.push("Select one or more subjects");
+    }
+    if (password.length === 0) {
+      errors.push("Password can't be empty");
+    }
+
+    return errors;
+  }
   const handleSignUp = async (e) => {
     e.preventDefault();
     try {
+      const errors = validate(
+        firstNameRef.current.value,
+        lastNameRef.current.value,
+        emailRef.current.value,
+        aboutRef.current.value,
+        availabilityForTutor,
+        subjectForTutor,
+        passwordRef.current.value
+      );
+      if (errors.length > 0) {
+        setInputErrors({ errors });
+        return;
+      }
       const response = await axios.post(
         "/Auth/Register",
         JSON.stringify({
@@ -85,7 +143,7 @@ const Signup = () => {
           role: selectedUserType,
           bio: selectedUserType === "Tutor" ? aboutRef.current.value : "",
           subjectForTutor,
-          availabilityForTutor
+          availabilityForTutor,
         }),
         {
           headers: { "Content-Type": "application/json", accept: "*/*" },
@@ -195,7 +253,6 @@ const Signup = () => {
                   type="password"
                   placeholder="Enter your password"
                   ref={passwordRef}
-                  required
                 />
               </div>
               <button
@@ -204,11 +261,20 @@ const Signup = () => {
               >
                 Sign Up
               </button>
+              {inputErrors?.errors?.map((error) => (
+                  <div
+                    key={error}
+                    className="flex items-center text-pry p-1 mt-2"
+                  >
+                    <BiErrorCircle />
+                    <p className="ml-2">{error}</p>
+                  </div>
+                ))}
               <div className="p-2 text-center mt-10 text-pry text-bold">
                 {error}
               </div>
             </form>
-            <div className="text-center mt-10">
+            <div className="text-center">
               Already have an account?{" "}
               <Link to="/login" className="text-[#17A1FA]">
                 Login

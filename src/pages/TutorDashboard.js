@@ -135,7 +135,21 @@ const TutorDashboard = () => {
               <p className="font-semibold text-sm w-[188px] h-[34px]">
                 {item.topic}
               </p>
-              <p
+              {item.status === 3 || item.status === 4 || item.status === 5 ? (
+                ""
+              ) : (
+                <p
+                  className="flex items-center border rounded-lg border-[#21334F] p-1 cursor-pointer"
+                  key={item.sessionId}
+                  onClick={() => {
+                    handleSetStatus(item.student, item.studentImage);
+                    setSelectedId(item.sessionId);
+                  }}
+                >
+                  Status
+                </p>
+              )}
+              {/* <p
                 className="flex items-center border rounded-lg border-[#21334F] p-1 cursor-pointer"
                 key={item.sessionId}
                 onClick={() => {
@@ -144,7 +158,7 @@ const TutorDashboard = () => {
                 }}
               >
                 Status
-              </p>
+              </p> */}
               <StatusModal
                 statusId={selectedId === item.sessionId}
                 status={status}
@@ -215,7 +229,7 @@ const TutorDashboard = () => {
           </div>
         ))}
       </div>
-      <Pagination />
+      {/* <Pagination /> */}
     </DashboardLayout>
   );
 };

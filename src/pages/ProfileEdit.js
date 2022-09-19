@@ -59,10 +59,9 @@ const ProfileEdit = () => {
         surname: lastName.current.value,
         image: userImage ? userImage : decoded[`${key}uri`],
       };
-      setUserDetails(userObj)
+      setUserDetails(userObj);
       navigate("/profile");
     } catch (error) {
-      // console.log("ERROR", error);
       setError(error?.response?.data?.title);
     }
   };
@@ -81,42 +80,43 @@ const ProfileEdit = () => {
           </Link>
           <div className="bg-white mt-5 mb-5 md:mb-1 md:mt-1 py-6 md:py-16 border-2 border-[#BCCACE]-600">
             <form className="md:w-4/8 px-6 md:px-16 mx-auto text-sm">
-            <div className="flex items-center flex-col bg-[#f7f7f7] h-[187px] text-sm rounded">
-              <label htmlFor="select-image">
-                <div className="relative">
-                  <img
-                    src={userDetails.image}
-                    alt="avatar"
-                    className="w-[90px] rounded-full mt-8 mb-4"
-                  />
-                  <div className="absolute bottom-2 right-2 flex bg-white w-[25px] h-[25px] justify-center items-center rounded-full">
-                    <BsCamera
-                      style={{
-                        color: "#FD2959",
-                        fontSize: "16px",
-                      }}
+              <div className="flex items-center flex-col bg-[#f7f7f7] h-[187px] text-sm rounded">
+                <label htmlFor="select-image">
+                  <div className="relative">
+                    <img
+                      src={userDetails.image}
+                      alt="avatar"
+                      className="w-[90px] rounded-full mt-8 mb-4"
                     />
+                    <div className="absolute bottom-2 right-2 flex bg-white w-[25px] h-[25px] justify-center items-center rounded-full">
+                      <BsCamera
+                        style={{
+                          color: "#FD2959",
+                          fontSize: "16px",
+                        }}
+                      />
+                    </div>
                   </div>
-                </div>
-              </label>
-              <input
-                accept="image/png, image/jpg, image/jpeg"
-                type="file"
-                id="select-image"
-                style={{ display: "none" }}
-                onChange={handleImageUpload}
-                multiple={false}
-              />
-              <span className="ml-2">
-                {userDetails.name} {userDetails.surname}
-              </span>
-            </div>
+                </label>
+                <input
+                  accept="image/png, image/jpg, image/jpeg"
+                  type="file"
+                  id="select-image"
+                  style={{ display: "none" }}
+                  onChange={handleImageUpload}
+                  multiple={false}
+                />
+                <span className="ml-2">
+                  {userDetails.name} {userDetails.surname}
+                </span>
+              </div>
               <div className="mt-4">
                 <label>First Name</label>
                 <input
                   className="block border w-full mt-2 py-3 px-2 outline-none"
                   type="text"
                   placeholder="Enter full name"
+                  defaultValue={userDetails.name}
                   ref={firstName}
                 />
               </div>
@@ -126,6 +126,7 @@ const ProfileEdit = () => {
                   className="block border w-full mt-2 py-3 px-2 outline-none"
                   type="text"
                   placeholder="Enter full name"
+                  defaultValue={userDetails.surname}
                   ref={lastName}
                 />
               </div>

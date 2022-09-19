@@ -7,7 +7,7 @@ const ReminderBoard = () => {
   const { userDetails } = useContext(AuthContext);
   return (
     <DashboardLayout userDetails={userDetails}>
-      <div className="flex flex-col items-center w-full">
+      <div className="flex flex-col items-center w-full pt-8">
         <h1 className="text-3xl font-bold my-8 text-center">
           Improve and measure your skills with <br /> study reminder
         </h1>

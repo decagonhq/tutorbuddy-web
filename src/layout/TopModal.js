@@ -9,7 +9,7 @@ const TopModal = ({ modalButton, children }) => {
   return (
     <>
       <Modal
-        isOpen={modalOpen}
+        // isOpen={modalOpen}
         onRequestClose={() => setModalOpen(false)}
         style={ModalStyle}
       >

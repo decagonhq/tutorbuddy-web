@@ -1,6 +1,11 @@
 import { Link } from "react-router-dom";
 
 const SuccessfulComment = () => {
+  const token = localStorage.getItem("userToken");
+  const user = JSON.parse(token);
+  const userName = localStorage.getItem("userName");
+  const tutorDetails = localStorage.getItem("tutorDetails");
+  const tutor = JSON.parse(tutorDetails);
   return (
     <div className="bg-[#E5E5E5] min-h-screen">
       <div className="text-[#21334F] container mx-auto py-10 md:py-20">
@@ -17,11 +22,19 @@ const SuccessfulComment = () => {
                   alt="student"
                 />
               </div>
-              <h3 className="mb-4 text-2xl font-bold">Comment updated successfully</h3>
-              <p>Your comment has been updated successfully.</p>
-              <Link to="/tutor_dashboard">
+              <h3 className="mb-4 text-2xl font-bold">
+                Comment updated successfully
+              </h3>
+              <p>
+                Your comment for{" "}
+                <span className="font-bold">
+                  {user.roles[0] === "Tutor" ? userName : tutor.tutorName}
+                </span>{" "}
+                has been updated successfully.
+              </p>
+              <Link to={user.roles[0] === "Tutor" ? "/tutor_dashboard" : "/mycourses"}>
                 <button className="text-sm block bg-pry w-full py-3 text-white mt-6">
-                  Tutor Dashboard
+                  {user.roles[0] === "Tutor" ? "Tutor Dashboard" : "My Courses"}
                 </button>
               </Link>
             </form>

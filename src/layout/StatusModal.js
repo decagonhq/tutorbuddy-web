@@ -14,7 +14,7 @@ const StatusModal = ({
   return (
     <>
       {status && statusId && (
-        <div className="w-[375px] pb-8 absolute z-100 bg-white top-12">
+        <div className="w-[375px] pb-8 fixed bg-white top-12">
           <div className="flex justify-between w-full p-4">
             <p>Change Status</p>
             <MdOutlineClose

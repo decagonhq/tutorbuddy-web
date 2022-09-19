@@ -10,7 +10,7 @@ const Header = ({ userDetails }) => {
   return (
     <nav className="shadow-md py-6 px-4">
       <div className="flex justify-between items-center container mx-auto">
-        <Link to="/">
+        <Link to={state.userType === "student" ? "/learn" : "/tutor_dashboard"}>
           <img
             src="/images/logo.svg"
             className="w-[160px] md:w-[205px]"
@@ -29,16 +29,34 @@ const Header = ({ userDetails }) => {
           >
             Dashboard
           </Link>
-          <Link
-            to="/reminder_board"
-            className={`mr-[39px] ${
-              location.pathname === "/reminder_board"
-                ? "text-pry font-bold"
-                : "text-black"
-            } hidden md:block`}
-          >
-            Reminder
-          </Link>
+          {state.userType === "student" ? (
+            <Link
+              to="/mycourses"
+              className={`mr-[39px] ${
+                location.pathname === "/mycourses"
+                  ? "text-pry font-bold"
+                  : "text-black"
+              } hidden md:block`}
+            >
+              My Courses
+            </Link>
+          ) : (
+            ""
+          )}
+          {state.userType === "student" ? (
+            <Link
+              to="/reminder_board"
+              className={`mr-[39px] ${
+                location.pathname === "/reminder_board"
+                  ? "text-pry font-bold"
+                  : "text-black"
+              } hidden md:block`}
+            >
+              Reminder
+            </Link>
+          ) : (
+            ""
+          )}
           <div className="mr-[39px] cursor-pointer">
             <TopModal modalButton="Notification">
               <NotificationContent />
